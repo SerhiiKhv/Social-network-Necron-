@@ -1,0 +1,22 @@
+.masseg {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    height: 100%;
+}
+
+.textDialog {
+    background-color: #CD5B45;
+}
+
+.poleForText {
+    position:absolute;
+    bottom:0;
+    padding: 10px;
+}
+
+.textareaMasseg {
+    resize: none;
+    width: 760px;
+}
+
+
