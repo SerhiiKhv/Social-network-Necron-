@@ -1,31 +1,49 @@
 import React from 'react';
-import s from './AvaInfo.module.css'
-import Preloader from "../../../Preloader/Preloader";
 
 class ProfileStatus extends React.Component {
+
+    state = {
+        editMode: false,
+        status: this.props.status
+    }
+
+    activetedEditMode = () =>{
+        this.setState({
+            editMode: true
+        })
+    }
+
+    doActivetedEditMode = () =>{
+        this.setState({
+            editMode: false
+        })
+        this.props.putStatusProfile(this.state.status);
+    }
+    onStatusChange = (e) =>{
+        this.setState({
+            status: e.currentTarget.value
+        });
+    }
+
+
     render() {
-        return null;
+        return (
+            <div>
+                {!this.state.editMode &&
+                    <div>
+                        <span onDoubleClick={this.activetedEditMode}>{this.props.status || "-------"}</span>
+                    </div>
+                }
+                {this.state.editMode &&
+                <div>
+                    <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.doActivetedEditMode} value={this.state.status}></input>
+                </div>
+                }
+            </div>
+
+        )
     }
 }
 
-const AvaInfo = (props) => {
 
-if(!props.profile){
-    return <Preloader/>
-}
-
-    return(
-        <div>
-            <div>
-                <img
-                    src='https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'/>
-            </div>
-            <div>
-                <img src={props.profile.photos.large}/>
-            </div>
-            <ProfileStatus/>
-        </div>
-    );
-}
-
-export default AvaInfo;
+export default ProfileStatus;
