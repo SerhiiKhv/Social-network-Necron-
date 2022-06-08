@@ -8,6 +8,7 @@ import MassegConteiner from "./Component/Content/Masseg/MassegConteiner";
 import UsersConteiner from "./Component/Content/Users/UsersConteiner";
 import ProfileConteiner from "./Component/Content/Profile/ProfileConteiner";
 import HeaderConteiner from "./Component/Header/HeaderComponent";
+import Login from "./Login/Login";
 
 const App = (props) => {
 
@@ -25,6 +26,7 @@ const App = (props) => {
                     <Route path='/setting' component={Setting}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/users' render={() =><UsersConteiner/>}/>
+                    <Route path='/login' render={() =><Login/>}/>
                 </div>
 
             </div>
