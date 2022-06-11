@@ -5,13 +5,15 @@ import {frendsPageReducer} from "./frendsPage-reducer";
 import {usersPageReducer} from "./usersPage-reducer";
 import {authMeReducer} from "./authMe-reducer";
 import thunkMiddleware from "redux-thunk";
+import {reducer as formReduser} from "redux-form";
 
 let reducers = combineReducers({
     profilePage: profilePageReducer,
     messagePage: messagePageReducer,
     frendsPage: frendsPageReducer,
     usersPage: usersPageReducer,
-    authMe: authMeReducer
+    authMe: authMeReducer,
+    form: formReduser
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
