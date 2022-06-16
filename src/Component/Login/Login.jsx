@@ -4,6 +4,34 @@ import {connect} from "react-redux";
 import {login, logout} from "../../Redux/authMe-reducer";
 import {Redirect} from "react-router-dom";
 
+
+const LoginForm = (props) => {
+    return(
+    <Form
+        onSubmit={formData => {
+            props.login(formData.email,formData.password,formData.rememberMe);
+        }}>
+        {({ handleSubmit, pristine, form, submitting }) => (
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <Field placeholder={"Email"} name={"email"} component={"input"}/>
+                </div>
+                <div>
+                    <Field placeholder={"Password"} name={"password"} component={"input"} type={"password"}/>
+                </div>
+                <div>
+                    <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
+                </div>
+                <div>
+                    <button>Login</button>
+                </div>
+            </form>
+        )}
+    </Form>
+    )
+}
+
+
 const Login = (props) => {
 
     if(props.isAuth){
@@ -13,33 +41,8 @@ const Login = (props) => {
     return (
         <div>
             <h1>Login</h1>
-            <Form
-                initialValues={{
-                    firstName: ''
-                }}
-                onSubmit={formData => {
-                    props.login(formData.email,formData.password,formData.rememberMe);
-                }}
-                validate={values => {
 
-                }}>
-                {({ handleSubmit, pristine, form, submitting }) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <Field placeholder={"Email"} name={"email"} component={"input"}/>
-                        </div>
-                        <div>
-                            <Field placeholder={"Password"} name={"password"} component={"input"} type={"password"}/>
-                        </div>
-                        <div>
-                            <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
-                        </div>
-                        <div>
-                            <button>Login</button>
-                        </div>
-                    </form>
-                )}
-            </Form>
+            <LoginForm login={props.login}/>
         </div>
     );
 }
