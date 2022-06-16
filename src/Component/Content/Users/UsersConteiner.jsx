@@ -8,7 +8,7 @@ import {
     setCurrentPage,
     getUsers
 } from '../../../Redux/usersPage-reducer';
-import Preloader from "../../Preloader/Preloader";
+import Preloader from "../../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
 

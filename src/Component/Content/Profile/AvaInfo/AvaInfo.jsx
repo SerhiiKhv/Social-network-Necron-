@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './AvaInfo.module.css'
-import Preloader from "../../../Preloader/Preloader";
+import Preloader from "../../../common/Preloader/Preloader";
 
 const AvaInfo = (props) => {
 

@@ -3,6 +3,7 @@ import s from './MyPost.module.css'
 import Post from "./Post/Post";
 import {Form, Field} from 'react-final-form'
 import {MaxLength, required} from "../../../../utils/validator/validator";
+import {Textarea} from "../../../common/FormController/FormController";
 
 const PostForm = (props) => {
 
@@ -16,7 +17,8 @@ const PostForm = (props) => {
         }}>
         {({handleSubmit, pristine, form, submitting}) => (
             <form onSubmit={handleSubmit}>
-                    <Field name={"newPostText"} component={"textarea"}
+                    <Field name={"newPostText"} component={Textarea}
+                           placeholder={"Text for new post"}
                            validate={composeValidators(required, MaxLength(30))}/>
                 <button>Add Post</button>
             </form>
