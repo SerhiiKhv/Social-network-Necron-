@@ -36,14 +36,12 @@ export const authMe = () => {
 }
 
 
-export const login = (email,password,rememberMe) => {
-    return (dispatch) => {
+export const login = (email,password,rememberMe) => (dispatch) => {
         authAPI.login(email,password,rememberMe,true).then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(authMe());
             }
         });
-    };
 }
 
 

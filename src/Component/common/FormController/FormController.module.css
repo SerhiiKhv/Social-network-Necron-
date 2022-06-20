@@ -8,3 +8,10 @@
 {
     color: red;
 }
+
+.formSomeError
+{
+    color: red;
+    background: orange;
+    border: solid red 2px;
+}
