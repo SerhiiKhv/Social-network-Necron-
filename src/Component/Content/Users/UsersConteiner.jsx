@@ -6,11 +6,18 @@ import {
     unfollow,
     setUsers,
     setCurrentPage,
-    getUsers
+    reviewUsers
 } from '../../../Redux/usersPage-reducer';
 import Preloader from "../../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
+import {
+    getCurrentPage,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../../Redux/selector/users-selector";
 
 class UsersAPIConteiner extends React.Component {
 
@@ -40,11 +47,11 @@ class UsersAPIConteiner extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching:getIsFetching(state)
 
     }
 }
@@ -52,7 +59,7 @@ let mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps,{
         follow,unfollow,setUsers,
-        setCurrentPage,getUsers
+        setCurrentPage,getUsers: reviewUsers
     }),
     withAuthRedirect
 )(UsersAPIConteiner)

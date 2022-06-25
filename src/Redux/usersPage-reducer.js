@@ -81,9 +81,10 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 export const setIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
 export const followingProgress = (isFetching, userID) => ({type: FOLLOWNG_PROGRESS, isFetching , userID})
 
-export const getUsers = (currentPage,pageSize) => {
+export const reviewUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setIsFetching(true));
+        dispatch(setCurrentPage(currentPage));
         UsersAPI.getUsers(currentPage,pageSize).then(data => {
             dispatch(setUsers(data.items));
             dispatch(setTotalUsersCount(data.totalCount));
