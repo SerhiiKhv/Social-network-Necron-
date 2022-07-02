@@ -13,7 +13,7 @@ const LoginForm = (props) => {
         onSubmit={formData => {
             props.login(formData.email,formData.password,formData.rememberMe);
         }}>
-        {({ handleSubmit, pristine, form, submitting }) => (
+        {({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                 <div>
                     <Field placeholder={"Email"} name={"email"} component={Input}
@@ -36,17 +36,15 @@ const LoginForm = (props) => {
 }
 
 
-const Login = (props) => {
-
-    if(props.isAuth){
+const Login = ({isAuth, login}) => {
+    if(isAuth){
         return <Redirect to={"/profile"}/>
     }
 
     return (
         <div>
             <h1>Login</h1>
-
-            <LoginForm login={props.login}/>
+            <LoginForm login={login}/>
         </div>
     );
 }

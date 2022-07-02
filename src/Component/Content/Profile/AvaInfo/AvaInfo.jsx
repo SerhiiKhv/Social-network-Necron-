@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import style from './AvaInfo.module.css'
 import Preloader from "../../../common/Preloader/Preloader";
 

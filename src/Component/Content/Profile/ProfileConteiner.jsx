@@ -11,6 +11,8 @@ import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
 
+
+
 class ProfileConteiner extends React.Component{
 
     componentDidMount() {
@@ -27,8 +29,8 @@ class ProfileConteiner extends React.Component{
 
     render() {
         return (
-           <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                    putStatusProfile={this.props.putStatusProfile}/>
+            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
+                     putStatusProfile={this.props.putStatusProfile}/>
         );
     }
 }

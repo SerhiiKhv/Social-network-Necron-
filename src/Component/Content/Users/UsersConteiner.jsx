@@ -22,11 +22,11 @@ import {
 class UsersAPIConteiner extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage,this.props.pageSize);
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNamber) => {
-        this.props.getUsers(pageNamber,this.props.pageSize);
+        this.props.getUsers(pageNamber, this.props.pageSize);
     }
 
     render() {
