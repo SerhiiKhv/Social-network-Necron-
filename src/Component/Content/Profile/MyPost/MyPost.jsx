@@ -6,7 +6,6 @@ import {MaxLength, required} from "../../../../utils/validator/validator";
 import {Textarea} from "../../../common/FormController/FormController";
 
 const PostForm = (props) => {
-
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
 
@@ -28,9 +27,9 @@ const PostForm = (props) => {
 }
 
 
-const MyPost = (props) => {
-
-    let postElement = props.profilePage.post.map(p => <Post text={p.text} like={p.like}/>);
+const MyPost =  React.memo(props => {
+    console.log("Hi");
+    let postElement = props.profilePage.posts.map(p => <Post text={p.text} like={p.like}/>);
 
     return (
         <div className={s.post}>
@@ -40,6 +39,6 @@ const MyPost = (props) => {
             </div>
         </div>
     );
-}
+})
 
 export default MyPost;

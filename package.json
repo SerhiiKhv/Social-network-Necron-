@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "jest": "^26.6.0",
     "reselect": "^4.1.6",
     "reselector": "^0.23.0"
   }
