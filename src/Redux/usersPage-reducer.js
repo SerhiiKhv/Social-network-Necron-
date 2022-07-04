@@ -17,7 +17,6 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false
-
 }
 
 export const usersPageReducer = (state = initialState, action) => {
