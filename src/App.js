@@ -8,12 +8,14 @@ import MassegConteiner from "./Component/Content/Masseg/MassegConteiner";
 import UsersConteiner from "./Component/Content/Users/UsersConteiner";
 import ProfileConteiner from "./Component/Content/Profile/ProfileConteiner";
 import HeaderConteiner from "./Component/Header/HeaderComponent";
-import Login from "./Component/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializedApp} from "./Redux/app-reducer";
 import Preloader from "./Component/common/Preloader/Preloader";
 import store from "./Redux/redux-store";
+import {withSuspense} from "./Hoc/withSuspense";
+
+const Login = React.lazy(() => import('./Component/Login/Login'));
 
 class AppStart extends Component {
     componentDidMount() {
@@ -37,7 +39,7 @@ class AppStart extends Component {
                         <Route path='/setting' component={Setting}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/users' render={() => <UsersConteiner/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/login' render={withSuspense(Login)}/>
                     </div>
 
                 </div>
