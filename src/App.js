@@ -4,10 +4,10 @@ import Nav from './Component/Nav/Nav'
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import Music from "./Component/Content/Music/Music";
 import Setting from "./Component/Content/Setting/Setting";
-import MassegConteiner from "./Component/Content/Masseg/MassegConteiner";
-import UsersConteiner from "./Component/Content/Users/UsersConteiner";
-import ProfileConteiner from "./Component/Content/Profile/ProfileConteiner";
-import HeaderConteiner from "./Component/Header/HeaderComponent";
+import MassageContainer from "./Component/Content/Masseg/MassegConteiner";
+import UsersContainer from "./Component/Content/Users/UsersConteiner";
+import ProfileContainer from "./Component/Content/Profile/ProfileConteiner";
+import HeaderContainer from "./Component/Header/HeaderComponent";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializedApp} from "./Redux/app-reducer";
@@ -29,16 +29,16 @@ class AppStart extends Component {
         return (
                 <div className='app-wrapper'>
 
-                    <HeaderConteiner/>
+                    <HeaderContainer/>
 
                     <Nav/>
 
                     <div className='app-wrapper-content'>
-                        <Route path='/profile/:userId?' render={() => <ProfileConteiner/>}/>
-                        <Route path='/masseg' render={() => <MassegConteiner/>}/>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                        <Route path='/masseg' render={() => <MassageContainer/>}/>
                         <Route path='/setting' component={Setting}/>
                         <Route path='/music' component={Music}/>
-                        <Route path='/users' render={() => <UsersConteiner/>}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
                         <Route path='/login' render={withSuspense(Login)}/>
                     </div>
 
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-let AppConteiner = compose(
+let AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializedApp})
 )(AppStart)
@@ -59,7 +59,7 @@ let AppConteiner = compose(
 let App = (props) => {
     return <Provider store={store}>
         <BrowserRouter>
-            <AppConteiner/>
+            <AppContainer/>
         </BrowserRouter>
     </Provider>
 }

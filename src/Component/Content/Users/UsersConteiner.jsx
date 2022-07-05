@@ -19,7 +19,7 @@ import {
     getUsers
 } from "../../../Redux/selector/users-selector";
 
-class UsersAPIConteiner extends React.Component {
+class UsersAPIContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
@@ -62,4 +62,4 @@ export default compose(
         setCurrentPage,getUsers: reviewUsers
     }),
     withAuthRedirect
-)(UsersAPIConteiner)
+)(UsersAPIContainer)

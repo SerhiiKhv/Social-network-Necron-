@@ -1,4 +1,4 @@
-.masseg {
+.message {
     display: grid;
     grid-template-columns: 2fr 5fr;
     height: 100%;
@@ -14,7 +14,7 @@
     padding: 10px;
 }
 
-.textareaMasseg {
+.textareaMessage {
     resize: none;
     width: 760px;
 }

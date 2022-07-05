@@ -13,7 +13,7 @@ import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
 
 
 
-class ProfileConteiner extends React.Component{
+class ProfileContainer extends React.Component{
 
     componentDidMount() {
         let userID = this.props.match.params.userId
@@ -48,5 +48,5 @@ export default compose(
     withAuthRedirect,
     withRouter,
     connect(mapStateToProps, {setUserProfile, getProfile, getStatusProfile, putStatusProfile})
-)(ProfileConteiner)
+)(ProfileContainer)
 

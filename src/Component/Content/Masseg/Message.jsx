@@ -3,40 +3,40 @@ import s from './Masseg.module.css'
 import Dialogs from "./Dialogs/Dialogs";
 import Dialog from "./Dialogs/Dialog/Dialog";
 
-const Masseg = (props) => {
+const Message = (props) => {
 
     let dialogElement = props.messagePage.dialog.map(d => <Dialog text={d.text} ava={d.ava}/>);
 
     let dialogsElement = props.messagePage.dialogs.map(d => <Dialogs name={d.name}
                                                                id={d.id} ava={d.ava}/>);
 
-    let newMassegElement = React.createRef();
+    let newMessageElement = React.createRef();
 
-    let addMasseg = () => {
-        props.onAddMasseg();
+    let addMessage = () => {
+        props.onAddMessage();
     }
 
-    let massegChange = () => {
-        let newMasseg = newMassegElement.current.value;
-        props.onMassegChange(newMasseg);
+    let messageChange = () => {
+        let newMessage = newMessageElement.current.value;
+        props.onMessageChange(newMessage);
     }
 
     return (
-        <div className={s.masseg}>
+        <div className={s.message}>
             <div>
                 {dialogsElement}
             </div>
             <div className={s.textDialog}>
                 {dialogElement}
                 <div className={s.poleForText}>
-                <textarea className={s.textareaMasseg} onChange={massegChange}
-                          ref={newMassegElement}
+                <textarea className={s.textareaMessage} onChange={messageChange}
+                          ref={newMessageElement}
                           value={props.newMassegText}/>
-                    <button onClick={addMasseg}>--></button>
+                    <button onClick={addMessage}>--></button>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Masseg;
+export default Message;

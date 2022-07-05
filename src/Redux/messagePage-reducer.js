@@ -1,5 +1,5 @@
-const ADD_MASSEG = 'add-Masseg';
-const UPDATE_NEW_MASSEG_TEXT = 'update-New-Masseg-Text';
+const ADD_MESSAGE = 'add-Message';
+const UPDATE_NEW_MESSAGE_TEXT = 'update-New-Message-Text';
 
 let initialState = {
     dialogs: [
@@ -21,27 +21,27 @@ let initialState = {
         {text: 'Good', ava: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'}
     ],
 
-    newMassegText: ''
+    newMessageText: ''
 }
 
 export const messagePageReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case ADD_MASSEG:
-            let newMasseg = {
-                text: state.newMassegText,
+        case ADD_MESSAGE:
+            let newMessage = {
+                text: state.newMessageText,
                 ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'
             }
             return {
                 ...state,
-                dialog: [...state.dialog, newMasseg],
+                dialog: [...state.dialog, newMessage],
                 newMassegText: ''
             }
 
-        case UPDATE_NEW_MASSEG_TEXT:
+        case UPDATE_NEW_MESSAGE_TEXT:
             return {
                 ...state,
-                newMassegText: action.newMasseg
+                newMessageText: action.newMasseg
             };
 
         default:
@@ -49,6 +49,6 @@ export const messagePageReducer = (state = initialState, action) => {
     }
 }
 
-export const addMassegActiveCreator = (text) => ({type: ADD_MASSEG})
+export const addMessageActiveCreator = (text) => ({type: ADD_MESSAGE})
 
-export const updateNewMassegTextActiveCreator = (text) => ({type: UPDATE_NEW_MASSEG_TEXT, newMasseg: text})
+export const updateNewMessageTextActiveCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMasseg: text})
