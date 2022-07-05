@@ -4,9 +4,9 @@ import Nav from './Component/Nav/Nav'
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import Music from "./Component/Content/Music/Music";
 import Setting from "./Component/Content/Setting/Setting";
-import MassageContainer from "./Component/Content/Masseg/MassegConteiner";
-import UsersContainer from "./Component/Content/Users/UsersConteiner";
-import ProfileContainer from "./Component/Content/Profile/ProfileConteiner";
+import MassageContainer from "./Component/Content/Masseg/MassegContainer";
+import UsersContainer from "./Component/Content/Users/UsersContainer";
+import ProfileContainer from "./Component/Content/Profile/ProfileContainer";
 import HeaderContainer from "./Component/Header/HeaderComponent";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";

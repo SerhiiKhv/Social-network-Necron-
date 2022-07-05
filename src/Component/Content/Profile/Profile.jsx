@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Profile.module.css'
 import AvaInfo from "./AvaInfo/AvaInfo";
-import MyPostConteiner from "./MyPost/MyPostConreiner";
+import MyPostConteiner from "./MyPost/MyPostContainer";
 import ProfileStatusWithHooks from "./AvaInfo/ProfileStatusWithHooks";
 
 const Profile = (props) => {
