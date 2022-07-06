@@ -1,6 +1,6 @@
 .nav{
     grid-area: n;
-    background-color: cadetblue;
+    background-color: #0AA1DD;
     padding: 20px;
     height: 690px;
  }
@@ -11,12 +11,5 @@
 }
 
 .item a.activeLink{
-   color: green;
-}
-
-.frends{
-    padding-top: 20px;
-}
-.frends img{
-    display: inline;
+   color: #FFE61B;
 }

@@ -1,4 +1,9 @@
-import {addPostActiveCreator, deletePost, profilePageReducer} from "../profilePage-reducer";
+import {
+    addPostActiveCreator,
+    deletePost,
+    getStatus,
+    profilePageReducer
+} from "../profilePage-reducer";
 
 let state = {
     posts: [
@@ -21,4 +26,10 @@ test('delete post', () => {
     let action = deletePost(3);
     let newState = profilePageReducer(state, action);
     expect(newState.posts.length).toBe(2);
+});
+
+test('put status profile', () => {
+    let action = getStatus("Hello");
+    let newState = profilePageReducer(state, action);
+    expect(newState.status).toBe("Hello");
 });

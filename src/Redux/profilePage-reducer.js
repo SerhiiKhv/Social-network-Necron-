@@ -4,6 +4,7 @@ const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USERS_PROFILE';
 const GET_STATUS = 'GET_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SET_PHOTOS_SUCCESS = 'SET_PHOTOS_SUCCESS';
 
 let initialState = {
     posts: [
@@ -34,11 +35,15 @@ export const profilePageReducer = (state = initialState, action) => {
             return {
                 ...state, profile: action.profile,
             }
+        case SET_PHOTOS_SUCCESS:
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            }
         case GET_STATUS:
             return {
                 ...state, status: action.status,
             }
-            case DELETE_POST:
+        case DELETE_POST:
             return {
                 ...state, posts: state.posts.filter(p => p.id != action.postId),
             }
@@ -52,6 +57,7 @@ export const addPostActiveCreator = (newPostText) => ({type: ADD_POST, newPostTe
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const getStatus = (status) => ({type: GET_STATUS, status})
 export const deletePost = (postId) => ({type: DELETE_POST, postId})
+export const setPhotosSuccess = (photos) => ({type: SET_PHOTOS_SUCCESS, photos})
 
 export const getProfile = (userId) => async (dispatch) => {
 
@@ -70,3 +76,11 @@ export const putStatusProfile = (status) => async (dispatch) => {
         dispatch(getStatus(status));
     }
 }
+
+export const putPhotosProfile = (photosFile) => async (dispatch) => {
+    let response = await ProfileAPI.putPhotos(photosFile)
+    if (response.data.resultCode === 0) {
+        dispatch(setPhotosSuccess(response.data.data.photos));
+    }
+}
+

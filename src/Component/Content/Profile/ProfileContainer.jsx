@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from "./Profile";
 import {
     getProfile,
-    getStatusProfile,
+    getStatusProfile, putPhotosProfile,
     putStatusProfile,
     setUserProfile
 } from "../../../Redux/profilePage-reducer";
@@ -29,8 +29,12 @@ class ProfileContainer extends React.Component{
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status}
-                     putStatusProfile={this.props.putStatusProfile}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     putStatusProfile={this.props.putStatusProfile}
+                     putPhotosProfile={this.props.putPhotosProfile}
+                     isOwner={this.props.match.params.userId}/>
         );
     }
 }
@@ -47,6 +51,7 @@ let mapStateToProps = (state) => {
 export default compose(
     withAuthRedirect,
     withRouter,
-    connect(mapStateToProps, {setUserProfile, getProfile, getStatusProfile, putStatusProfile})
+    connect(mapStateToProps, {setUserProfile, getProfile, getStatusProfile,
+        putStatusProfile, putPhotosProfile})
 )(ProfileContainer)
 

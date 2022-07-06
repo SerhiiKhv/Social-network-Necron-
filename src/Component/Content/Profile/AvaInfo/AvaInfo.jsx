@@ -8,17 +8,33 @@ const AvaInfo = (props) => {
         return <Preloader/>
     }
 
-    if(!props.profile.photos.small){
-        props.profile.photos.small = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
+    if(!props.profile.photos.large){
+        props.profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
+    }
+
+    const onPutPhotosProfile = (e) => {
+        if(e.target.files.length){
+            props.putPhotosProfile(e.target.files[0]);
+        }
     }
 
     return (
         <div>
-            <div>
-                {props.profile.fullName}
+            <div className={style}>
+                <div className={style.Ava}>
+                    <img src={props.profile.photos.large}/>
+                </div>
+                <div className={style.FullName}>
+                    {props.profile.fullName}
+                </div>
             </div>
-            <div className={style.Ava}>
-                <img src={props.profile.photos.small}/>
+
+            <div>
+                {!props.isOwner && <input type={"file"} onChange={onPutPhotosProfile}/>}
+            </div>
+
+            <div>
+
             </div>
         </div>
     );

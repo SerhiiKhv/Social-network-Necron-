@@ -56,7 +56,7 @@ let AppContainer = compose(
     connect(mapStateToProps, {initializedApp})
 )(AppStart)
 
-let App = (props) => {
+let App = () => {
     return <Provider store={store}>
         <BrowserRouter>
             <AppContainer/>
