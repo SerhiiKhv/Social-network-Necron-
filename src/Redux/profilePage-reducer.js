@@ -60,7 +60,6 @@ export const deletePost = (postId) => ({type: DELETE_POST, postId})
 export const setPhotosSuccess = (photos) => ({type: SET_PHOTOS_SUCCESS, photos})
 
 export const getProfile = (userId) => async (dispatch) => {
-
     let response = await ProfileAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Profile from "./Profile";
 import {
     getProfile,
     getStatusProfile, putPhotosProfile,
@@ -10,26 +9,21 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
+import Setting from "./Setting";
 
 
 
-class ProfileContainer extends React.Component{
+class SettingContainer extends React.Component{
 
     componentDidMount() {
-        let userID = this.props.match.params.userId
-        if(!userID){
-            userID = this.props.authorizedUserId;
-            if(!userID){
-                this.props.history.push("/login");
-            }
-        }
+        let userID = this.props.authorizedUserId;
         this.props.getProfile(userID);
         this.props.getStatusProfile(userID);
     }
 
     render() {
         return (
-            <Profile {...this.props}
+            <Setting {...this.props}
                      profile={this.props.profile}
                      status={this.props.status}
                      putStatusProfile={this.props.putStatusProfile}
@@ -52,5 +46,5 @@ export default compose(
     withRouter,
     connect(mapStateToProps, {setUserProfile, getProfile, getStatusProfile,
         putStatusProfile, putPhotosProfile})
-)(ProfileContainer)
+)(SettingContainer)
 

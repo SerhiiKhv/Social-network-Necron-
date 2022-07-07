@@ -12,29 +12,30 @@ const AvaInfo = (props) => {
         props.profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
     }
 
-    const onPutPhotosProfile = (e) => {
-        if(e.target.files.length){
-            props.putPhotosProfile(e.target.files[0]);
-        }
-    }
-
     return (
         <div>
-            <div className={style}>
+            <div className={style.divAva}>
                 <div className={style.Ava}>
                     <img src={props.profile.photos.large}/>
                 </div>
-                <div className={style.FullName}>
+                <div>
                     {props.profile.fullName}
                 </div>
             </div>
-
             <div>
-                {!props.isOwner && <input type={"file"} onChange={onPutPhotosProfile}/>}
+                {props.status}
             </div>
-
             <div>
-
+                {props.profile.contacts.github}
+            </div>
+            <div>
+                {props.profile.contacts.facebook}
+            </div>
+            <div>
+                {props.profile.contacts.instagram}
+            </div>
+            <div>
+                {props.profile.contacts.twitter}
             </div>
         </div>
     );
