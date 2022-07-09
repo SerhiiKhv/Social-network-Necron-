@@ -26,16 +26,16 @@ const AvaInfo = (props) => {
                 {props.status}
             </div>
             <div>
-                {props.profile.contacts.github}
+                <b>gitHub</b>: {props.profile.contacts.github}
             </div>
             <div>
-                {props.profile.contacts.facebook}
+                <b>facebook</b>: {props.profile.contacts.facebook}
             </div>
             <div>
-                {props.profile.contacts.instagram}
+                <b>instagram</b>: {props.profile.contacts.instagram}
             </div>
             <div>
-                {props.profile.contacts.twitter}
+                <b>twitter</b>: {props.profile.contacts.twitter}
             </div>
         </div>
     );

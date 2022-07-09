@@ -11,7 +11,7 @@ const LoginForm = (props) => {
     return(
     <Form
         onSubmit={formData => {
-            props.login(formData.email,formData.password,formData.rememberMe);
+            props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
         }}>
         {({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
@@ -26,6 +26,8 @@ const LoginForm = (props) => {
                 <div>
                     <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
                 </div>
+                {props.captchaUrl && <img src={props.captchaUrl} />}
+                {props.captchaUrl &&  <Field placeholder={"Captcha"} name={"captcha"} component={Input} validate={required}/>}
                 <div>
                     <button>Login</button>
                 </div>
@@ -36,7 +38,7 @@ const LoginForm = (props) => {
 }
 
 
-const Login = ({isAuth, login}) => {
+const Login = ({isAuth, login, captchaUrl}) => {
     if(isAuth){
         return <Redirect to={"/profile"}/>
     }
@@ -44,14 +46,15 @@ const Login = ({isAuth, login}) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginForm login={login}/>
+            <LoginForm login={login} captchaUrl={captchaUrl}/>
         </div>
     );
 }
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.authMe.isAuth
+        isAuth: state.authMe.isAuth,
+        captchaUrl: state.authMe.captchaUrl
     }
 }
 

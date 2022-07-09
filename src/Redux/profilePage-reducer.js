@@ -83,3 +83,11 @@ export const putPhotosProfile = (photosFile) => async (dispatch) => {
     }
 }
 
+export const putInfoProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().authMe.userId;
+    let response = await ProfileAPI.putProfile(profile)
+    if (response.data.resultCode === 0) {
+        dispatch(getProfile(userId));
+    }
+}
+

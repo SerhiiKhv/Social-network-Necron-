@@ -2,6 +2,9 @@ import React from 'react';
 import style from './Setting.module.css'
 import ProfileStatusWithHooks from "../Profile/AvaInfo/ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
+import {Field, Form} from "react-final-form";
+import {Input} from "../../common/FormController/FormController";
+import {required} from "../../../utils/validator/validator";
 
 const Setting = (props) => {
 
@@ -26,7 +29,7 @@ const Setting = (props) => {
             </div>
 
             <div>
-                Your avatar
+                <b>Your avatar</b>
             </div>
             <div className={style.divLine}>
                 <div className={style.Ava}>
@@ -37,13 +40,39 @@ const Setting = (props) => {
                 </div>
             </div>
             <div className={style.divLine}>
-                Your status:
+                <b>Your status</b>:
                 <ProfileStatusWithHooks status={props.status}
                                         putStatusProfile={props.putStatusProfile}/>
             </div>
 
+            {/*<SettingInfoProfileForm putInfoProfile={props.putInfoProfile}/>*/}
+
         </div>
     );
 }
+
+/*const SettingInfoProfileForm = (props) => {
+    return(
+        <Form
+            onSubmit={formData => {
+                console.log(formData);
+                props.putInfoProfile(formData);
+            }}>
+            {({handleSubmit}) => (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <Field placeholder={"Full name"} name={"fullName"} component={Input}
+                               validate={required}/>
+                    </div>
+
+                    <div>
+                        <button>Save</button>
+                    </div>
+                </form>
+            )}
+        </Form>
+    )
+}*/
+
 
 export default Setting;
