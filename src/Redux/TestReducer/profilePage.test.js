@@ -33,3 +33,4 @@ test('put status profile', () => {
     let newState = profilePageReducer(state, action);
     expect(newState.status).toBe("Hello");
 });
+

@@ -2,11 +2,15 @@ import {authMe} from "./authMe-reducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
-let initialState = {
+export type InitialStateType = {
+    initialized: boolean
+}
+
+let initialState: InitialStateType = {
     initialized: false
 }
 
-export const appReducer = (state = initialState, action) => {
+export const appReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type){
         case INITIALIZED_SUCCESS:
            return{
@@ -18,10 +22,14 @@ export const appReducer = (state = initialState, action) => {
     }
 }
 
-export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
+type InitializedSuccessActionType = {
+    type: typeof INITIALIZED_SUCCESS
+}
+
+export const initializedSuccess = (): InitializedSuccessActionType => ({type: INITIALIZED_SUCCESS})
 
 export const initializedApp = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         let promise = dispatch(authMe());
         Promise.all([promise]).then( () => {
             dispatch(initializedSuccess());
