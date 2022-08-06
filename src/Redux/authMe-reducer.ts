@@ -31,18 +31,18 @@ type AuthMeDataActionPayloadType = {
     login: string | null
     isAuth: boolean
 }
+
+
+
 type AuthMeDataActionType = {
     type: typeof AUTH_ME_DATA
     payload: AuthMeDataActionPayloadType
 }
-
+export const authMeData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): AuthMeDataActionType=> ({type: AUTH_ME_DATA, payload: {email, login, userId, isAuth}})
 type CaptchaSuccessActionType = {
     type: typeof CAPTCHA_SUCCESS
     payload: {captchaUrl :string | null}
 }
-
-
-export const authMeData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): AuthMeDataActionType=> ({type: AUTH_ME_DATA, payload: {email, login, userId, isAuth}})
 export const captchaSuccess = (captchaUrl: string | null): CaptchaSuccessActionType => ({type: CAPTCHA_SUCCESS, payload: {captchaUrl}})
 
 export const authMe = () => async (dispatch: any) => {

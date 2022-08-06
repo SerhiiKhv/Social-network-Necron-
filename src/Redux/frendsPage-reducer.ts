@@ -1,11 +1,18 @@
+type FriendsType = {
+    name: string
+    ava: string
+}
+
 let initialState = {
-    frend: [
+    friends: [
         {name: 'Anton', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
         {name: 'Tom', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
         {name: 'Job', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
-    ]
+    ] as Array<FriendsType>
 }
 
-export const frendsPageReducer = (state = initialState, action) => {
+type InitialState = typeof initialState;
+
+export const frendsPageReducer = (state = initialState, action: any): InitialState => {
     return state;
 }
