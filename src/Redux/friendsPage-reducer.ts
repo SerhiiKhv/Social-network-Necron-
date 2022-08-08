@@ -13,6 +13,6 @@ let initialState = {
 
 type InitialState = typeof initialState;
 
-export const frendsPageReducer = (state = initialState, action: any): InitialState => {
+export const friendsPageReducer = (state = initialState, action: any): InitialState => {
     return state;
 }

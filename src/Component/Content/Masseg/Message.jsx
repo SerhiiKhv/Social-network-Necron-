@@ -16,12 +16,12 @@ const Message = (props) => {
     let newMessageElement = React.createRef();
 
     let addMessage = () => {
-        props.onAddMessage();
+        props.addMessageActiveCreator();
     }
 
     let messageChange = () => {
         let newMessage = newMessageElement.current.value;
-        props.onMessageChange(newMessage);
+        props.updateNewMessageTextActiveCreator(newMessage);
     }
 
     return (
@@ -34,7 +34,7 @@ const Message = (props) => {
                 <div className={s.poleForText}>
                 <textarea className={s.textareaMessage} onChange={messageChange}
                           ref={newMessageElement}
-                          value={props.newMassegText}/>
+                          value={props.newMessageText}/>
                     <button onClick={addMessage}>--></button>
                 </div>
             </div>

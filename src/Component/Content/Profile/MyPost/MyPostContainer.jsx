@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostActiveCreator, updateNewPostTextActiveCreator} from "../../../../Redux/profilePage-reducer";
+import {addPostActiveCreator} from "../../../../Redux/profilePage-reducer";
 import MyPost from "./MyPost";
 import {connect} from "react-redux";
 
@@ -17,6 +17,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MyPostConteiner = connect(mapStateToProps, mapDispatchToProps)(MyPost);
+const MyPostContainer = connect(mapStateToProps, mapDispatchToProps)(MyPost);
 
-export default MyPostConteiner;
+export default MyPostContainer;
