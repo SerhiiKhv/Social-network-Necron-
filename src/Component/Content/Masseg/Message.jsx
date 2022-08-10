@@ -20,8 +20,7 @@ const Message = (props) => {
     }
 
     let messageChange = () => {
-        let newMessage = newMessageElement.current.value;
-        props.updateNewMessageTextActiveCreator(newMessage);
+        props.updateNewMessageTextActiveCreator(newMessageElement.current.value);
     }
 
     return (

@@ -1,7 +1,12 @@
 import React from 'react';
 import s from './Dialog.module.css'
 
-const Dialog = (props) => {
+type PropsType = {
+    ava: string
+    text: string
+}
+
+const Dialog: React.FC<PropsType> = (props) => {
     return (
         <div className={s.dialog}>
             <div><img src={props.ava}/> {props.text}</div>

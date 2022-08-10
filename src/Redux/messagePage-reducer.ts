@@ -7,6 +7,7 @@ type DialogsType = {
     ava: string
 }
 type DialogType = {
+    id: number
     text: string
     ava: string
 }
@@ -30,9 +31,9 @@ let initialState = {
         }
     ] as Array<DialogsType>,
     dialog: [
-        {text: 'Hi', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
-        {text: 'Hello', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
-        {text: 'Good', ava: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'}
+        {id: 1, text: 'Hi', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
+        {id: 2,text: 'Hello', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
+        {id: 3,text: 'Good', ava: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'}
     ]as Array<DialogType>,
 
     newMessageText: ''
@@ -45,6 +46,7 @@ export const messagePageReducer = (state = initialState, action: any):InitialSta
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {
+                id: 4,
                 text: state.newMessageText,
                 ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'
             }

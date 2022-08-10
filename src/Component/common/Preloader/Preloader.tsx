@@ -1,7 +1,7 @@
 import React from 'react';
 import preloader from "../../../Assets/GIF/loading-svgrepo-com.svg";
 
-const Preloader = (props) => {
+const Preloader = () => {
     return (
         <img src={preloader}/>
     );

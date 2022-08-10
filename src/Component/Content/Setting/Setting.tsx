@@ -2,17 +2,25 @@ import React from 'react';
 import style from './Setting.module.css'
 import ProfileStatusWithHooks from "../Profile/AvaInfo/ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
-import {Field, Form} from "react-final-form";
-import {Input} from "../../common/FormController/FormController";
-import {required} from "../../../utils/validator/validator";
+import {ProfileType} from "../../../Redux/Types/types";
 
-const Setting = (props) => {
+type PropsType = {
+    profile: ProfileType
+    status: string
+
+    putPhotosProfile: (photosFile: any) => void
+    putStatusProfile: (status: string) => void
+
+    putInfoProfile: (profile: ProfileType) => void
+}
+
+const Setting: React.FC<PropsType> = (props) => {
 
     if (!props.profile) {
         return <Preloader/>
     }
 
-    const onPutPhotosProfile = (e) => {
+    const onPutPhotosProfile = (e: any) => {
         if(e.target.files.length){
             props.putPhotosProfile(e.target.files[0]);
         }

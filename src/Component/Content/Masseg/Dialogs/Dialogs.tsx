@@ -2,9 +2,15 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import {BrowserRouter, NavLink} from "react-router-dom";
 
-const Dialogs = (props) => {
+type PropsType = {
+    id: number
+    ava: string
+    name: string
+}
 
-    let path = "/masseg/" + props.id;
+const Dialogs: React.FC<PropsType> = (props) => {
+
+    let path = "/message/" + props.id;
 
     return (
         <BrowserRouter>

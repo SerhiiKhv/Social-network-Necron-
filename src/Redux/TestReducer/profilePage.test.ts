@@ -4,15 +4,16 @@ import {
     getStatus,
     profilePageReducer
 } from "../profilePage-reducer";
+import {PostType, ProfileType} from "../Types/types";
 
 let state = {
     posts: [
-        {id: 1, text: 'Hi', like: '2'},
-        {id: 2, text: 'Hello', like: '3'},
-        {id: 3, text: 'Good', like: '5'}
-    ],
+        {id: 1, text: 'Hi', like: 2},
+        {id: 2, text: 'Hello', like: 3},
+        {id: 3, text: 'Good', like: 5}
+    ] as Array<PostType>,
     newPostText: '',
-    profile: null,
+    profile: null as ProfileType | null,
     status: ""
 }
 
