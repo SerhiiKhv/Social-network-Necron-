@@ -35,7 +35,7 @@ class AppStart extends Component {
 
                     <div className='app-wrapper-content'>
                         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                        <Route path='/masseg' render={() => <MassageContainer/>}/>
+                        <Route path='/message' render={() => <MassageContainer/>}/>
                         <Route path='/setting' component={SettingContainer}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/users' render={() => <UsersContainer/>}/>

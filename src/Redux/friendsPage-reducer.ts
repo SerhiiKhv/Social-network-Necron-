@@ -1,4 +1,4 @@
-type FriendsType = {
+export type FriendsType = {
     name: string
     ava: string
 }
