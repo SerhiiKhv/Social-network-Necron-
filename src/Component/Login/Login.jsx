@@ -6,8 +6,7 @@ import {Redirect} from "react-router-dom";
 import {required} from "../../utils/validator/validator";
 import {Input} from "../common/FormController/FormController";
 
-
-const LoginForm = (props) => {
+const LoginForm= (props) => {
     return(
     <Form
         onSubmit={formData => {
@@ -26,7 +25,7 @@ const LoginForm = (props) => {
                 <div>
                     <Field type={"checkbox"} name={"rememberMe"} component={"input"}/> remember me
                 </div>
-                {props.captchaUrl && <img src={props.captchaUrl} />}
+                {props.captchaUrl && <img src={props.captchaUrl}/>}
                 {props.captchaUrl &&  <Field placeholder={"Captcha"} name={"captcha"} component={Input} validate={required}/>}
                 <div>
                     <button>Login</button>
@@ -38,7 +37,7 @@ const LoginForm = (props) => {
 }
 
 
-const Login = ({isAuth, login, captchaUrl}) => {
+const Login= ({isAuth, login, captchaUrl}) => {
     if(isAuth){
         return <Redirect to={"/profile"}/>
     }
@@ -46,7 +45,7 @@ const Login = ({isAuth, login, captchaUrl}) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginForm login={login} captchaUrl={captchaUrl}/>
+            <LoginForm login={login} captchaUrl={captchaUrl} isAuth={isAuth}/>
         </div>
     );
 }

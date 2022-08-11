@@ -1,8 +1,14 @@
 import React from 'react';
 import style from './AvaInfo.module.css'
 import Preloader from "../../../common/Preloader/Preloader";
+import {ProfileType} from "../../../../Redux/Types/types";
 
-const AvaInfo = (props) => {
+type PropsType = {
+    profile: ProfileType
+    status: string
+}
+
+const AvaInfo: React.FC<PropsType> = (props) => {
 
     if (!props.profile) {
         return <Preloader/>

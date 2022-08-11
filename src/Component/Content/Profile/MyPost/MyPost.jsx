@@ -12,9 +12,9 @@ const PostForm = (props) => {
     return(
     <Form
         onSubmit={values => {
-            props.onAddPost(values.newPostText);
+            props.addPostActiveCreator(values.newPostText);
         }}>
-        {({handleSubmit, pristine, form, submitting}) => (
+        {({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
                     <Field name={"newPostText"} component={Textarea}
                            placeholder={"Text for new post"}
@@ -27,13 +27,12 @@ const PostForm = (props) => {
 }
 
 
-const MyPost =  React.memo(props => {
-    console.log("Hi");
+const MyPost = (props => {
     let postElement = props.profilePage.posts.map(p => <Post text={p.text} like={p.like}/>);
 
     return (
         <div className={s.post}>
-            <PostForm onAddPost={props.onAddPost} />
+            <PostForm addPostActiveCreator={props.addPostActiveCreator} />
             <div>
                 {postElement}
             </div>
