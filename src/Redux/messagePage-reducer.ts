@@ -41,7 +41,9 @@ let initialState = {
 
 type InitialState = typeof initialState;
 
-export const messagePageReducer = (state = initialState, action: any):InitialState => {
+type ActionsTypes = addMessageActiveCreatorActionType | updateNewMessageTextActiveCreatorActionType
+
+export const messagePageReducer = (state = initialState, action: ActionsTypes):InitialState => {
 
     switch (action.type) {
         case ADD_MESSAGE:
