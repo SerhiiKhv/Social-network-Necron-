@@ -1,6 +1,7 @@
 import {authAPI, securityAPi} from "../Api/Api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {ResultsCodesCaptchaEnum, ResultsCodesEnum} from "./ResultsCodesEnumsTypes/ResultsCodesEnumsTypes";
 
 const AUTH_ME_DATA = 'AUTH_ME_DATA';
 const CAPTCHA_SUCCESS = 'CAPTCHA_SUCCESS';
@@ -49,9 +50,9 @@ type CaptchaSuccessActionType = {
 export const captchaSuccess = (captchaUrl: string | null): CaptchaSuccessActionType => ({type: CAPTCHA_SUCCESS, payload: {captchaUrl}})
 
 export const authMe = ():ThunkType => async (dispatch) => {
-    let response = await authAPI.Me();
-    if (response.data.resultCode === 0) {
-        let {id, email, login} = response.data.data;
+    let data = await authAPI.Me();
+    if (data.resultCode === ResultsCodesEnum.Success) {
+        let {id, email, login} = data.data;
         dispatch(authMeData(id, email, login, true));
     }
 }
@@ -60,22 +61,22 @@ export const authMe = ():ThunkType => async (dispatch) => {
 export const login = (email: string, password: string,
                       rememberMe: boolean, captchaUrl: string | null):ThunkType =>
     async (dispatch) => {
-    let response = await authAPI.login(email, password, rememberMe, captchaUrl);
-    if (response.data.resultCode === 0) {
+    let data = await authAPI.login(email, password, rememberMe, captchaUrl);
+    if (data.resultCode === ResultsCodesEnum.Success) {
         await dispatch(authMe());
-    }else if(response.data.resultCode === 10){
+    }else if(data.resultCode === ResultsCodesCaptchaEnum.captchaIsRequired){
         await dispatch(getCaptchaUrl());
     }
 }
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
-    let response = await securityAPi.captcha();
-    let captchaUrl = response.data.url;
+    let data = await securityAPi.captcha();
+    let captchaUrl = data.url;
         dispatch(captchaSuccess(captchaUrl));
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let response = await authAPI.logout();
-    if (response.data.resultCode === 0) {
+    let data = await authAPI.logout();
+    if (data.resultCode === ResultsCodesEnum.Success) {
         dispatch(authMeData(null, null, null, false));
     }
 }

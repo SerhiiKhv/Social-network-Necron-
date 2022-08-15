@@ -2,6 +2,7 @@ import {ProfileAPI} from "../Api/Api";
 import {PhotosType, PostType, ProfileType} from "./Types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {ResultsCodesEnum} from "./ResultsCodesEnumsTypes/ResultsCodesEnumsTypes";
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USERS_PROFILE';
@@ -24,8 +25,8 @@ type InitialState = typeof initialState;
 type ActionsTypes = addPostActiveCreatorActionType | setUserProfileActionType |
     getStatusActionType | deletePostActionType | setPhotosSuccessActionType
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-export const profilePageReducer = (state = initialState, action: ActionsTypes):InitialState => {
 
+export const profilePageReducer = (state = initialState, action: ActionsTypes):InitialState => {
     switch (action.type){
         case ADD_POST:
             let newPost = {
@@ -86,33 +87,33 @@ type setPhotosSuccessActionType = {
 export const setPhotosSuccess = (photos: PhotosType): setPhotosSuccessActionType => ({type: SET_PHOTOS_SUCCESS, photos})
 
 export const getProfile = (userId: number | null):ThunkType => async (dispatch) => {
-    let response = await ProfileAPI.getProfile(userId);
-    dispatch(setUserProfile(response.data));
+    let data = await ProfileAPI.getProfile(userId);
+    dispatch(setUserProfile(data));
 }
 
 export const getStatusProfile = (userId: number):ThunkType => async (dispatch) => {
-    let response = await ProfileAPI.getStatus(userId);
-    dispatch(getStatus(response.data));
+    let data = await ProfileAPI.getStatus(userId);
+    dispatch(getStatus(data));
 }
 
 export const putStatusProfile = (status: string):ThunkType => async (dispatch) => {
-    let response = await ProfileAPI.putStatus(status)
-    if (response.data.resultCode === 0) {
+    let data = await ProfileAPI.putStatus(status)
+    if (data.resultCode === ResultsCodesEnum.Success) {
         dispatch(getStatus(status));
     }
 }
 
 export const putPhotosProfile = (photosFile: any):ThunkType => async (dispatch) => {
-    let response = await ProfileAPI.putPhotos(photosFile)
-    if (response.data.resultCode === 0) {
-        dispatch(setPhotosSuccess(response.data.data.photos));
+    let data = await ProfileAPI.putPhotos(photosFile)
+    if (data.resultCode === ResultsCodesEnum.Success) {
+        dispatch(setPhotosSuccess(data.data.photos));
     }
 }
 
 export const putInfoProfile = (profile: ProfileType):ThunkType => async (dispatch, getState: () => AppStateType) => {
     const userId = getState().authMe.userId;
-    let response = await ProfileAPI.putProfile(profile)
-    if (response.data.resultCode === 0) {
+    let data = await ProfileAPI.putProfile(profile)
+    if (data.resultCode === ResultsCodesEnum.Success) {
         await dispatch(getProfile(userId));
     }
 }

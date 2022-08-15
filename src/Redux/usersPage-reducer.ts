@@ -4,6 +4,7 @@ import {UsersType} from "./Types/types";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
 import {Dispatch} from "redux";
+import {ResultsCodesEnum} from "./ResultsCodesEnumsTypes/ResultsCodesEnumsTypes";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -128,7 +129,7 @@ const followUnFollow = async (dispatch: DispatchType, userId: number,
                               ApiMethod: any, actionCreator: (userId: number) => unfollowSuccessActionType | followSuccessActionType) => {
     dispatch(followingProgress(true, userId));
     let response = await ApiMethod(userId);
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultsCodesEnum.Success) {
         dispatch(actionCreator(userId));
     }
     dispatch(followingProgress(false, userId));
