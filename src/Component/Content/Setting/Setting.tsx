@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Setting.module.css'
+import style from './Setting.module.scss'
 import ProfileStatusWithHooks from "../Profile/AvaInfo/ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/Types/types";
@@ -21,33 +21,35 @@ const Setting: React.FC<PropsType> = (props) => {
     }
 
     const onPutPhotosProfile = (e: any) => {
-        if(e.target.files.length){
+        if (e.target.files.length) {
             props.putPhotosProfile(e.target.files[0]);
         }
     }
 
-    if(!props.profile.photos.large){
+    if (!props.profile.photos.large) {
         props.profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
     }
 
     return (
-        <div>
-            <div className={style.Title}>
+        <div className={style.setting}>
+            <div className={style.title}>
                 <h1>Setting</h1>
             </div>
 
-            <div>
+            <div className={style.Ava}>
                 <b>Your avatar</b>
-            </div>
-            <div className={style.divLine}>
-                <div className={style.Ava}>
+                <div>
                     <img src={props.profile.photos.large}/>
                 </div>
-                <div>
-                    {<input type={"file"} onChange={onPutPhotosProfile}/>}
-                </div>
+
+                <label className="custom-file-upload">
+                    <input type={"file"} onChange={onPutPhotosProfile}/>
+                    Select a photo to replace your avatar
+                </label>
+
             </div>
-            <div className={style.divLine}>
+
+            <div className={style.status}>
                 <b>Your status</b>:
                 <ProfileStatusWithHooks status={props.status}
                                         putStatusProfile={props.putStatusProfile}/>

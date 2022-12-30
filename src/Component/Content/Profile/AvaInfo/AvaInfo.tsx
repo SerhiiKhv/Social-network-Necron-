@@ -10,38 +10,43 @@ type PropsType = {
 
 const AvaInfo: React.FC<PropsType> = (props) => {
 
+    const createSocialNet = (str: string) => {
+        return str === "" || str == null ? "------" : str;
+    }
+
     if (!props.profile) {
         return <Preloader/>
     }
 
-    if(!props.profile.photos.large){
+    if (!props.profile.photos.large) {
         props.profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
     }
 
     return (
         <div>
-            <div className={style.divAva}>
-                <div className={style.Ava}>
-                    <img src={props.profile.photos.large}/>
-                </div>
+            <div className={style.Ava}>
                 <div>
                     {props.profile.fullName}
                 </div>
+                <div>
+                    <img src={props.profile.photos.large}/>
+                </div>
+
             </div>
             <div>
                 {props.status}
             </div>
             <div>
-                <b>gitHub</b>: {props.profile.contacts.github}
+                <b>gitHub</b>: {createSocialNet(props.profile.contacts.github)}
             </div>
             <div>
-                <b>facebook</b>: {props.profile.contacts.facebook}
+                <b>facebook</b>: {createSocialNet(props.profile.contacts.facebook)}
             </div>
             <div>
-                <b>instagram</b>: {props.profile.contacts.instagram}
+                <b>instagram</b>: {createSocialNet(props.profile.contacts.instagram)}
             </div>
             <div>
-                <b>twitter</b>: {props.profile.contacts.twitter}
+                <b>twitter</b>: {createSocialNet(props.profile.contacts.twitter)}
             </div>
         </div>
     );

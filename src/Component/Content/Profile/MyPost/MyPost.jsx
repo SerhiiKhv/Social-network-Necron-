@@ -9,17 +9,19 @@ const PostForm = (props) => {
     const composeValidators = (...validators) => value =>
         validators.reduce((error, validator) => error || validator(value), undefined)
 
+    console.log(props)
     return(
     <Form
-        onSubmit={values => {
+        onSubmit={ values => {
             props.actions.addPostActiveCreator(values.newPostText);
         }}>
         {({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
-                    <Field name={"newPostText"} component={Textarea}
+                    <Field className={s.textarea}
+                        name={"newPostText"} component={Textarea}
                            placeholder={"Text for new post"}
                            validate={composeValidators(required, MaxLength(30))}/>
-                <button>Add Post</button>
+                <button className={s.button}>Add Post</button>
             </form>
         )}
     </Form>
