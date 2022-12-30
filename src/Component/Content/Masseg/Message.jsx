@@ -2,6 +2,19 @@ import React from 'react';
 import s from './Masseg.module.css'
 import Dialogs from "./Dialogs/Dialogs";
 import Dialog from "./Dialogs/Dialog/Dialog";
+import {DialogsType, DialogType} from "../../../Redux/messagePage-reducer";
+
+/*type PropsType = {
+    messagePage: {
+        dialog: Array<DialogType>
+        dialogs: Array<DialogsType>
+    }
+    newMessageText: string
+
+    addMessageActiveCreator: () => void
+    updateNewMessageTextActiveCreator: (newMessage: string) => void
+}*/
+
 
 const Message = (props) => {
 
@@ -13,14 +26,14 @@ const Message = (props) => {
                                                                      key={d.id}
                                                                      ava={d.ava}/>);
 
-    let newMessageElement = React.createRef();
+    let newMessage = React.createRef();
 
     let addMessage = () => {
         props.addMessageActiveCreator();
     }
 
     let messageChange = () => {
-        props.updateNewMessageTextActiveCreator(newMessageElement.current.value);
+        props.updateNewMessageTextActiveCreator(newMessage.current.value);
     }
 
     return (
@@ -32,7 +45,7 @@ const Message = (props) => {
                 {dialogElement}
                 <div className={s.poleForText}>
                 <textarea className={s.textareaMessage} onChange={messageChange}
-                          ref={newMessageElement}
+                          ref={newMessage}
                           value={props.newMessageText}/>
                     <button onClick={addMessage}>----</button>
                 </div>

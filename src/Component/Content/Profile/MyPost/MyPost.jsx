@@ -12,7 +12,7 @@ const PostForm = (props) => {
     return(
     <Form
         onSubmit={values => {
-            props.addPostActiveCreator(values.newPostText);
+            props.actions.addPostActiveCreator(values.newPostText);
         }}>
         {({handleSubmit}) => (
             <form onSubmit={handleSubmit}>

@@ -1,12 +1,12 @@
 const ADD_MESSAGE = 'add-Message';
 const UPDATE_NEW_MESSAGE_TEXT = 'update-New-Message-Text';
 
-type DialogsType = {
+export type DialogsType = {
     name: string
     id: number
     ava: string
 }
-type DialogType = {
+export type DialogType = {
     id: number
     text: string
     ava: string

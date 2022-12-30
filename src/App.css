@@ -1,6 +1,7 @@
 .app-wrapper{
    margin: 0 auto;
-   width: 1400px;
+   width: 100%;
+   color: #ffffff;
 
    display: grid;
   
@@ -14,7 +15,7 @@
 
 .app-wrapper-content{
    grid-area: c;
-   background-color: coral;
+   background-image: url("./Assets/background/1616432910_13-p-zadnii-fon-chernii-14.jpg");
 }
 
 

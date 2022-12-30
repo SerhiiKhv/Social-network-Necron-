@@ -4,11 +4,20 @@
 }
 
 .pageNumber{
-    padding: 2px;
-    border: 1px solid grey;
+    margin: 10px;
 }
 
 .pageNumber.selectedPage{
-    font-weight: bold;
-    border-color: black;
+    background: #057fd0;
+    border: 6px solid #057fd0;
+    border-radius: 25px;
+}
+
+.button{
+    margin: 5px;
+    height: 25px;
+    background-color: #057fd0;
+    color: white;
+    border: 6px solid #057fd0;
+    border-radius: 25px;
 }

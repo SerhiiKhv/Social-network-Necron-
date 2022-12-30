@@ -11,12 +11,11 @@ type PropsType = {
 const Header: React.FC<PropsType> = (props) => {
     return (
         <header className={s.header}>
-            <div className={s.loginBlock}>
+            <div className={s.positionLogin}>
                 {props.isAuth ?
-                    <div>{props.login} - <button onClick={props.logout}>Log out</button></div> :
-                    <NavLink to={'login'}>Login</NavLink>}
+                    <button onClick={props.logout} className={s.myButton}>{props.login} - Log out</button> :
+                    <NavLink to={'login'} className={s.myButton}>Login</NavLink>}
             </div>
-
         </header>
     );
 }

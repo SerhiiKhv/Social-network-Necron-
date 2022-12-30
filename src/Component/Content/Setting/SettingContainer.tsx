@@ -2,8 +2,7 @@ import React from 'react';
 import {
     getProfile,
     getStatusProfile, putInfoProfile, putPhotosProfile,
-    putStatusProfile,
-    setUserProfile
+    putStatusProfile
 } from "../../../Redux/profilePage-reducer";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
@@ -21,9 +20,8 @@ type PropsType = {
     getProfile: (userID: number) => void
     getStatusProfile: (userID: number) => void
     putStatusProfile: (status: string) => void
-    putPhotosProfile: (photosFile: any) => void
+    putPhotosProfile: (photosFile: File) => void
     putInfoProfile: (profile: ProfileType) => void
-
 }
 
 class SettingContainer extends React.Component<PropsType>{
@@ -58,7 +56,7 @@ let mapStateToProps = (state: AppStateType) => {
 export default compose(
     withAuthRedirect,
     withRouter,
-    connect(mapStateToProps, {setUserProfile, getProfile, getStatusProfile,
+    connect(mapStateToProps, {getProfile, getStatusProfile,
         putStatusProfile, putPhotosProfile, putInfoProfile})
 )(SettingContainer)
 

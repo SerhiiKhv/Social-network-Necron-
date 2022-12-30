@@ -26,7 +26,7 @@ let Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, o
 
      return <div className={styles.paginator}>
          {portionNumber > 1
-         && <button onClick={() => setPortionNumber(portionNumber - 1)}>Back</button>}
+         && <button className={styles.button} onClick={() => setPortionNumber(portionNumber - 1)}>Back</button>}
          {portionNumber > 1
          && <span className={styles.pageNumber} onClick={() => setPortionNumber(portionNumber = 1)}>1 ...</span>}
 
@@ -44,7 +44,7 @@ let Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, o
          <span className={styles.pageNumber}
                onClick={() => setPortionNumber(portionNumber = portionCount)}>... {pagesCount}</span>}
          {portionCount > portionNumber &&
-         <button onClick={() => setPortionNumber(portionNumber + 1)}>Next</button>}
+         <button className={styles.button} onClick={() => setPortionNumber(portionNumber + 1)}>Next</button>}
          </div>
 }
 
