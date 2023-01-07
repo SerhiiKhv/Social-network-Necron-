@@ -1,9 +1,9 @@
 import {addMessageActiveCreator, updateNewMessageTextActiveCreator} from "../../../Redux/messagePage-reducer";
 import Message from "./Message";
 import {connect} from "react-redux";
-import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
 import {compose} from "redux";
 import {AppStateType} from "../../../Redux/redux-store";
+import React from "react";
 
 let mapStateToProps = (state: AppStateType) => {
    return {
@@ -12,7 +12,6 @@ let mapStateToProps = (state: AppStateType) => {
    }
 }
 
-export default compose(
-    connect(mapStateToProps, {updateNewMessageTextActiveCreator, addMessageActiveCreator}),
-    withAuthRedirect
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {updateNewMessageTextActiveCreator, addMessageActiveCreator})
 )(Message)

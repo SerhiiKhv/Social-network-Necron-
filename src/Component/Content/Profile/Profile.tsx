@@ -15,7 +15,7 @@ const Profile: React.FC<PropsType> = (props) => {
             <AvaInfo profile={props.profile}
                      status={props.status}/>
 
-            <MyPostContainer/>
+            {/*  <MyPostContainer/>   */}
         </div>
     );
 }

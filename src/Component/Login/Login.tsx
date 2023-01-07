@@ -2,7 +2,7 @@ import React from 'react';
 import {Form, Field} from 'react-final-form'
 import {connect} from "react-redux";
 import {login, logout} from "../../Redux/authMe-reducer";
-import {Redirect} from "react-router-dom";
+import {redirect} from "react-router-dom";
 import {required} from "../../utils/validator/validator";
 import {Input} from "../common/FormController/FormController";
 import {AppStateType} from "../../Redux/redux-store";
@@ -20,7 +20,7 @@ type LoginFormValuesType = {
     captcha: string
 }
 
-const LoginForm: React.FC<MapDispatchType & MapStateType>= (props) => {
+const LoginForm: React.FC<MapDispatchType & MapStateType> = (props) => {
     const onSubmitFunction = (formData: LoginFormValuesType) => {
         props.login(formData.email, formData.password, formData.rememberMe, formData.captcha);
     }
@@ -53,17 +53,15 @@ const LoginForm: React.FC<MapDispatchType & MapStateType>= (props) => {
     )
 }
 
-const Login: React.FC<MapDispatchType & MapStateType> = ({isAuth, login, captchaUrl}) => {
-    if(isAuth){
-        return <Redirect to={"/profile"}/>
-    }
-
+const Login: React.FC<any> = ({isAuth, login, captchaUrl}) => {
     return (
         <div>
-            <LoginForm login={login} captchaUrl={captchaUrl} isAuth={isAuth}/>
+           <LoginForm login={login} captchaUrl={captchaUrl} isAuth={isAuth}/>
         </div>
     );
 }
+
+
 
 type MapStateType = {
     isAuth: boolean
@@ -78,4 +76,3 @@ let mapStateToProps = (state: AppStateType): MapStateType => {
 }
 
 export default connect(mapStateToProps,{login, logout})(Login);
-

@@ -6,20 +6,25 @@ const Nav = () => {
 
     return (
         <nav className={s.nav}>
-            <div className={s.item}>
-                <NavLink to='/profile' activeClassName={s.activeLink} >Profile</NavLink>
+            <div>
+                <NavLink to='/profile' className={({isActive} ) =>
+                    isActive  ? s.activeLink : s.noActiveLink} >Profile</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/message' activeClassName={s.activeLink} >Message</NavLink>
+                <NavLink to='/massage' className={({isActive} ) =>
+                    isActive  ? s.activeLink : s.noActiveLink} >Message</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/setting' activeClassName={s.activeLink} >Setting</NavLink>
+                <NavLink to='/setting' className={({isActive} ) =>
+                    isActive  ? s.activeLink : s.noActiveLink} >Setting</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/music' activeClassName={s.activeLink} >Music</NavLink>
+                <NavLink to='/music' className={({isActive} ) =>
+                    isActive  ? s.activeLink : s.noActiveLink} >Music</NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to='/users' activeClassName={s.activeLink} >Users</NavLink>
+                <NavLink to='/users' className={({isActive} ) =>
+                    isActive  ? s.activeLink : s.noActiveLink} >Users</NavLink>
             </div>
         </nav>
     );

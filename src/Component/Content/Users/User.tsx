@@ -4,8 +4,18 @@ import userPhoto from '../../../Assets/ImgUsers/user.jpg';
 import {NavLink} from "react-router-dom";
 import style from './Users.module.css'
 import styles from "../../common/Paginator/Paginator.module.css";
+import {UsersType} from "../../../Redux/Types/types";
 
-let User = ({user, unfollow, follow}) => {
+type MapPropsType = {
+    user: UsersType
+}
+
+type DispatchPropsType = {
+    unfollow: (id: number) => void
+    follow: (id: number) => void
+}
+
+let User: React.FC<MapPropsType & DispatchPropsType> = ({user, unfollow, follow}) => {
     return <div className={style.users}>
         <div>
             <NavLink to={'/profile/' + user.id}>

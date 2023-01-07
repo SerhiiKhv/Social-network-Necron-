@@ -5,12 +5,11 @@ import {
     putStatusProfile
 } from "../../../Redux/profilePage-reducer";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
 import Setting from "./Setting";
 import {ProfileType} from "../../../Redux/Types/types";
 import {AppStateType} from "../../../Redux/redux-store";
+import {withRouter} from "../../../Hoc/withRouter";
 
 type PropsType = {
     authorizedUserId: number
@@ -53,8 +52,7 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose(
-    withAuthRedirect,
+export default compose<React.ComponentType>(
     withRouter,
     connect(mapStateToProps, {getProfile, getStatusProfile,
         putStatusProfile, putPhotosProfile, putInfoProfile})

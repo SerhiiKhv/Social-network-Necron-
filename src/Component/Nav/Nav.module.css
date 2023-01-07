@@ -5,11 +5,12 @@
     height: 690px;
  }
 
-.item a{
-    color: bisque;
+.activeLink{
+   color: #FFE61B;
     text-decoration: none;
 }
 
-.item a.activeLink{
-   color: #FFE61B;
+.noActiveLink{
+    color: bisque;
+    text-decoration: none;
 }

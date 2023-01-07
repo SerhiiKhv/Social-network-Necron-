@@ -16,7 +16,15 @@ type PropsType = {
     unfollow: (userId: number) => void
 }
 
-let Users: React.FC<PropsType> = ({totalUsersCount,followingInProgress, pageSize,currentPage,onPageChanged,users, ...props}) => {
+let Users: React.FC<PropsType> = ({
+                                      totalUsersCount,
+                                      followingInProgress,
+                                      pageSize,
+                                      currentPage,
+                                      onPageChanged,
+                                      users,
+                                      ...props
+                                  }) => {
     return <div>
         <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize}
                    currentPage={currentPage} onPageChanged={onPageChanged}/>
@@ -24,7 +32,7 @@ let Users: React.FC<PropsType> = ({totalUsersCount,followingInProgress, pageSize
             users.map(u => <User user={u}
                                  unfollow={props.unfollow}
                                  follow={props.follow}
-                                 //followingInProgress={followingInProgress}
+                    //followingInProgress={followingInProgress}
                                  key={u.id}
                 />
             )

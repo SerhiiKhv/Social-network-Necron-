@@ -8,7 +8,6 @@ import {
 } from '../../../Redux/usersPage-reducer';
 import Preloader from "../../common/Preloader/Preloader";
 import {compose} from "redux";
-import {withAuthRedirect} from "../../../Hoc/AuthRedirect";
 import {
     getCurrentPage,
     getIsFetching,
@@ -75,11 +74,10 @@ let mapStateToProps = (state: AppStateType): TStateProps => {
     }
 }
 
-export default compose(
+export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         follow,
         unfollow,
         reviewUsers
-    }),
-    withAuthRedirect
+    })
 )(UsersAPIContainer)

@@ -4,16 +4,20 @@ import Post from "./Post/Post";
 import {Form, Field} from 'react-final-form'
 import {MaxLength, required} from "../../../../utils/validator/validator";
 import {Textarea} from "../../../common/FormController/FormController";
+import {ProfileType} from "../../../../Redux/Types/types";
 
-const PostForm = (props) => {
-    const composeValidators = (...validators) => value =>
+type PropsTypePostForm = {
+    addPostActiveCreator: (values: string) => void
+}
+
+const PostForm: React.FC<PropsTypePostForm> = (props) => {
+    const composeValidators = (...validators: any[]) => (value: any) =>
         validators.reduce((error, validator) => error || validator(value), undefined)
 
-    console.log(props)
     return(
     <Form
         onSubmit={ values => {
-            props.actions.addPostActiveCreator(values.newPostText);
+            props.addPostActiveCreator(values.newPostText);
         }}>
         {({handleSubmit}) => (
             <form onSubmit={handleSubmit}>
@@ -29,7 +33,12 @@ const PostForm = (props) => {
 }
 
 
-const MyPost = (props => {
+type PropsTypeMyPost= {
+    addPostActiveCreator: () => void
+    profilePage: ProfileType
+}
+
+const MyPost: React.FC<PropsTypeMyPost> = (props) => {
     let postElement = props.profilePage.posts.map(p => <Post text={p.text} like={p.like}/>);
 
     return (
@@ -40,6 +49,6 @@ const MyPost = (props => {
             </div>
         </div>
     );
-})
+}
 
 export default MyPost;
