@@ -2,7 +2,10 @@ import React from 'react';
 import styles from './FormController.module.css';
 
 type FormControlPropsType = {
-    meta: any
+    meta: {
+        touched: string
+        error: string
+    }
     children: any
 }
 

@@ -10,10 +10,8 @@ type PropsType = {
     logout: () => void
 }
 
-class HeaderContainer extends React.Component<PropsType>{
-    render() {
-        return <Header {...this.props}/>
-    }
+const HeaderContainer: React.FC<PropsType> = (props) =>{
+        return <Header {...props}/>
 }
 
 let mapStateToProps = (state: AppStateType) => {

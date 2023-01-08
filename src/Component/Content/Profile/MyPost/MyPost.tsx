@@ -11,7 +11,7 @@ type PropsTypePostForm = {
 }
 
 const PostForm: React.FC<PropsTypePostForm> = (props) => {
-    const composeValidators = (...validators: any[]) => (value: any) =>
+    const composeValidators = (...validators: any[]) => (value: string) =>
         validators.reduce((error, validator) => error || validator(value), undefined)
 
     return(

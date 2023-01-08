@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     getProfile,
     getStatusProfile, putInfoProfile, putPhotosProfile,
@@ -23,24 +23,27 @@ type PropsType = {
     putInfoProfile: (profile: ProfileType) => void
 }
 
-class SettingContainer extends React.Component<PropsType>{
+const SettingContainer: React.FC<PropsType> = (props) =>{
 
-    componentDidMount() {
-        let userID = this.props.authorizedUserId;
-        this.props.getProfile(userID);
-        this.props.getStatusProfile(userID);
-    }
+    const [userID] = useState(props.authorizedUserId)
 
-    render() {
+    useEffect(() => {
+        {
+            let userID = props.authorizedUserId;
+            props.getProfile(userID);
+            props.getStatusProfile(userID);
+        }
+    }, [userID])
+
         return (
-            <Setting {...this.props}
-                     profile={this.props.profile}
-                     status={this.props.status}
-                     putStatusProfile={this.props.putStatusProfile}
-                     putPhotosProfile={this.props.putPhotosProfile}
-                     putInfoProfile={this.props.putInfoProfile}/>
+            <Setting {...props}
+                     profile={props.profile}
+                     status={props.status}
+                     putStatusProfile={props.putStatusProfile}
+                     putPhotosProfile={props.putPhotosProfile}
+                     putInfoProfile={props.putInfoProfile}/>
         );
-    }
+
 }
 
 let mapStateToProps = (state: AppStateType) => {
