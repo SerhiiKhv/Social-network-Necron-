@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Masseg.module.css'
+import s from './Masseg.module.scss'
 import Dialogs from "./Dialogs/Dialogs";
 import Dialog from "./Dialogs/Dialog/Dialog";
 import {DialogsType, DialogType} from "../../../Redux/messagePage-reducer";

@@ -5,7 +5,7 @@ import {login, logout} from "../../Redux/authMe-reducer";
 import {required} from "../../utils/validator/validator";
 import {Input} from "../common/FormController/FormController";
 import {AppStateType} from "../../Redux/redux-store";
-import s from "./Login.module.css"
+import s from "./Login.module.scss"
 
 type MapDispatchType = {
     login: (email: string, password: string,

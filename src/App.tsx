@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './App.css';
+import './App.scss';
 import Nav from './Component/Nav/Nav'
 import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
 import Music from "./Component/Content/Music/Music";

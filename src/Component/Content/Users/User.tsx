@@ -1,8 +1,8 @@
 import React from 'react';
-import s from './Users.module.css'
+import s from './Users.module.scss'
 import userPhoto from '../../../Assets/ImgUsers/user.jpg';
 import {NavLink} from "react-router-dom";
-import styles from './Users.module.css'
+import styles from './Users.module.scss'
 import {UsersType} from "../../../Redux/Types/types";
 
 type MapPropsType = {

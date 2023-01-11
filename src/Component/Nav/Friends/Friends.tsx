@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Friends.module.css'
+import s from './Friends.module.scss'
 import {FriendsType} from "../../../Redux/friendsPage-reducer";
 
 type PropsType = {

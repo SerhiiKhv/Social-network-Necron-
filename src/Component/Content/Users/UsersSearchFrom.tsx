@@ -1,7 +1,7 @@
 import React from "react";
 import {FilterType} from "../../../Redux/usersPage-reducer";
 import {Field, Formik} from "formik";
-import style from './Users.module.css'
+import style from './Users.module.scss'
 
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void
@@ -39,11 +39,11 @@ const UserForm: React.FC<PropsType> = (props) => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit}>
-                        <Field type='text' name='term' className={style.input}/>
+                        <Field type='text' name='term' className={style.inputText}/>
                         <Field name="friend" as="select" className={style.inputSelector}>
-                            <option className={style.inputSelector} value="null">All</option>
-                            <option className={style.inputSelector} value="true">Only followed</option>
-                            <option className={style.inputSelector} value="false">Only unfollowed</option>
+                            <option value="null">All</option>
+                            <option value="true">Only followed</option>
+                            <option value="false">Only unfollowed</option>
                         </Field>
 
                         <button type="submit" disabled={isSubmitting} className={style.button}>

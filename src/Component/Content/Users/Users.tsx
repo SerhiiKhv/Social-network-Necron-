@@ -2,7 +2,7 @@ import React from 'react';
 import Paginator from "../../common/Paginator/Paginator";
 import User from "./User";
 import {UsersType} from "../../../Redux/Types/types";
-import style from './Users.module.css'
+import style from './Users.module.scss'
 import UserForm from "./UsersSearchFrom";
 import {FilterType} from "../../../Redux/usersPage-reducer";
 

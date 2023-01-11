@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Profile.module.css'
+import s from './Profile.module.scss'
 import AvaInfo from "./AvaInfo/AvaInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
 import {ProfileType} from "../../../Redux/Types/types";

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './AvaInfo.module.css'
+import style from './AvaInfo.module.scss'
 import Preloader from "../../../common/Preloader/Preloader";
 import {ProfileType} from "../../../../Redux/Types/types";
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './MyPost.module.css'
+import s from './MyPost.module.scss'
 import Post from "./Post/Post";
 import {Form, Field} from 'react-final-form'
 import {MaxLength, required} from "../../../../utils/validator/validator";

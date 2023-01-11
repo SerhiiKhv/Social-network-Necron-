@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Dialog.module.css'
+import s from './Dialog.module.scss'
 
 type PropsType = {
     ava: string

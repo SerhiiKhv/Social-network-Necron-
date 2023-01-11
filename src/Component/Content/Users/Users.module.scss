@@ -28,6 +28,12 @@
     margin: 3px;
 }
 
+.searchForm{
+    display: inline;
+    text-align: center;
+    margin: 10px;
+}
+
 
 .button{
     margin: 5px;
@@ -39,8 +45,6 @@
 }
 
 .input{
-    height: 35px;
-    width: 30%;
     background-color: rgba(255,255,255,0.07);
     border-radius: 3px;
     padding: 0 10px;
@@ -53,29 +57,25 @@
     letter-spacing: 1px;
     outline: none;
     border: none;
+}
+
+
+.inputText{
+    height: 35px;
+    width: 30%;
+    @extend .input;
 }
 
 .inputSelector{
     height: 35px;
     width: 15%;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-    text-align: center;
-    font-family: 'Poppins',sans-serif;
-    color: #ffffff;
-    letter-spacing: 1px;
-    outline: none;
-    border: none;
-}
-
-.searchForm{
-    display: inline;
-    text-align: center;
-    margin: 10px;
+    @extend .input;
 }
 
 
+.inputSelector option {
+    margin: 40px;
+    background: rgba(0, 0, 0, 1);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
