@@ -26,9 +26,9 @@ type FollowResponseType = {
     messages: Array<string>
 }
 export const UsersAPI = {
-    getUsers: (currentPage: number, pageSize: number) => {
+    getUsers: (currentPage: number = 1, pageSize: number = 10, term: string = '', friend: null | boolean = null) => {
         return instance.get<GetUsersResponseType>(`users?page=${currentPage}
-        &cout=${pageSize}`).then(res => res.data)
+        &cout=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`)).then(res => res.data)
     },
     unfollow(userId: number) {
         return instance.delete<UnfollowResponseType>(`follow/${userId}`)

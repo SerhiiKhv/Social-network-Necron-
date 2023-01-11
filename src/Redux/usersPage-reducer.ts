@@ -12,9 +12,14 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [] as Array<number> // it`s users id
+    followingInProgress: [] as Array<number>, // it`s users id
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 }
 type InitialState = typeof initialState;
+export type FilterType = typeof initialState.filter;
 type ActionsTypes = InferActionsType<typeof actions>
 
 type DispatchType = Dispatch<ActionsTypes>
@@ -23,35 +28,25 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 export const usersPageReducer = (state = initialState, action: ActionsTypes):InitialState => {
     switch (action.type){
         case 'FOLLOW':
-           return{
-               ...state,
+           return{...state,
                users: updateObjectInArray(state.users, action.userID, "id", {followed: true})
            }
         case 'UNFOLLOW':
-            return{
-        ...state,
+            return{...state,
                 users: updateObjectInArray(state.users, action.userID, "id", {followed: false})
         }
 
         case 'USERS':
-            return{
-                ...state, users: action.users
-            }
+            return{...state, users: action.users}
 
         case 'SET_USERS_PAGE':
-            return{
-                ...state, currentPage: action.currentPage
-            }
+            return{...state, currentPage: action.currentPage}
 
         case 'IS_FETCHING':
-            return{
-                ...state, isFetching: action.isFetching
-            }
+            return{...state, isFetching: action.isFetching}
 
         case 'SET_TOTAL_USERS_COUNT':
-            return{
-                ...state, totalUsersCount: action.totalCount
-            }
+            return{...state, totalUsersCount: action.totalCount}
 
         case 'FOLLOWING_PROGRESS':
             return {
@@ -61,6 +56,9 @@ export const usersPageReducer = (state = initialState, action: ActionsTypes):Ini
                     : state.followingInProgress.filter(id => id !== action.userID)
             }
 
+        case 'FILTER_USERS':
+            return{...state, filter: action.payload}
+
         default:
             return state;
     }
@@ -68,6 +66,7 @@ export const usersPageReducer = (state = initialState, action: ActionsTypes):Ini
 
 export const actions = {
     followSuccess: (userID: number) => ({type: 'FOLLOW', userID} as const),
+    filterUsers: (filter: FilterType) => ({type: 'FILTER_USERS', payload: filter} as const),
     unfollowSuccess: (userID: number) => ({type: 'UNFOLLOW', userID} as const),
     setUsers: (users: Array<UsersType>) => ({type: 'USERS', users} as const),
     setCurrentPage: (currentPage: number) => ({type: 'SET_USERS_PAGE', currentPage} as const),
@@ -77,10 +76,11 @@ export const actions = {
 
 }
 
-export const reviewUsers = (currentPage: number, pageSize: number) => async (dispatch: any) => {
+export const reviewUsers = (currentPage: number, pageSize: number, filter: FilterType) => async (dispatch: any) => {
     dispatch(actions.setIsFetching(true));
     dispatch(actions.setCurrentPage(currentPage));
-    let data = await UsersAPI.getUsers(currentPage, pageSize);
+    dispatch(actions.filterUsers(filter));
+    let data = await UsersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend);
     dispatch(actions.setUsers(data.items));
     dispatch(actions.setTotalUsersCount(data.totalCount));
     dispatch(actions.setIsFetching(false));

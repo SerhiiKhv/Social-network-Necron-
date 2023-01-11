@@ -2,7 +2,6 @@ import React from 'react';
 import {Form, Field} from 'react-final-form'
 import {connect} from "react-redux";
 import {login, logout} from "../../Redux/authMe-reducer";
-import {redirect} from "react-router-dom";
 import {required} from "../../utils/validator/validator";
 import {Input} from "../common/FormController/FormController";
 import {AppStateType} from "../../Redux/redux-store";
