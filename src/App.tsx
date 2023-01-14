@@ -1,38 +1,41 @@
 import React, {useEffect} from 'react';
 import './App.scss';
 import Nav from './Component/Nav/Nav'
-import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Music from "./Component/Content/Music/Music";
 import MassageContainer from "./Component/Content/Masseg/MassegContainer";
 import ProfileContainer from "./Component/Content/Profile/ProfileContainer";
 import HeaderContainer from "./Component/Header/HeaderComponent";
-import {connect, Provider} from "react-redux";
+import {Provider, useDispatch, useSelector} from "react-redux";
 import {compose} from "redux";
 import {initializedApp} from "./Redux/app-reducer";
 import Preloader from "./Component/common/Preloader/Preloader";
 import store, {AppStateType} from "./Redux/redux-store";
 import SettingContainer from "./Component/Content/Setting/SettingContainer";
 import {withRouter} from "./Hoc/withRouter";
-import Login from "./Component/Login/Login";
+import {LoginPage} from "./Component/Login/Login";
 import UsersPage from "./Component/Content/Users/UsersPage";
+import {getIsAuth} from "./Redux/selector/login-selector";
 
-type MapTypeProps = {
-    initialized: boolean
-    isAuth: boolean
-}
 type DispatchTypeProps = {
-    initializedApp: () => void
     withSuspense: () => any
 }
 
-const AppStart: React.FC<MapTypeProps & DispatchTypeProps> = (props) => {
+const AppStart: React.FC<DispatchTypeProps> = () => {
+
+    const isAuth = useSelector(getIsAuth)
+    const initialized = useSelector((state: AppStateType) => state.app.initialized)
+
+    const dispatch = useDispatch()
+
+
     useEffect(() => {
         {
-            props.initializedApp();
+            dispatch(initializedApp());
         }
     })
 
-    if (!props.initialized) {
+    if (!initialized) {
         return <Preloader/>
     }
 
@@ -45,22 +48,22 @@ const AppStart: React.FC<MapTypeProps & DispatchTypeProps> = (props) => {
 
             <div className='app-wrapper-content'>
                 <Routes>
-                    <Route path='/profile/:userId?' element={props.isAuth ? (<ProfileContainer/>)
+                    <Route path='/profile/:userId?' element={isAuth ? (<ProfileContainer/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
-                    <Route path='/massage' element={props.isAuth ? (<MassageContainer/>)
+                    <Route path='/massage' element={isAuth ? (<MassageContainer/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
-                    <Route path='/setting' element={props.isAuth ? (<SettingContainer/>)
+                    <Route path='/setting' element={isAuth ? (<SettingContainer/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
-                    <Route path='/music' element={props.isAuth ? (<Music/>)
+                    <Route path='/music' element={isAuth ? (<Music/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
-                    <Route path='/login' element={!props.isAuth ? (<Login/>)
+                    <Route path='/login' element={!isAuth ? (<LoginPage/>)
                         : (<Navigate replace to={"/profile"}/>)}/>
 
-                    <Route path="/users" element={props.isAuth ? (<UsersPage/>)
+                    <Route path="/users" element={isAuth ? (<UsersPage/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
                 </Routes>
@@ -69,14 +72,9 @@ const AppStart: React.FC<MapTypeProps & DispatchTypeProps> = (props) => {
     );
 
 }
-const mapStateToProps = (state: AppStateType) => ({
-    initialized: state.app.initialized,
-    isAuth: state.authMe.isAuth
-})
 
 let AppContainer = compose<React.ComponentType>(
-    withRouter,
-    connect(mapStateToProps, {initializedApp})
+    withRouter
 )(AppStart)
 
 
