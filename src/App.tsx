@@ -4,7 +4,6 @@ import Nav from './Component/Nav/Nav'
 import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
 import Music from "./Component/Content/Music/Music";
 import MassageContainer from "./Component/Content/Masseg/MassegContainer";
-import UsersContainer from "./Component/Content/Users/UsersContainer";
 import ProfileContainer from "./Component/Content/Profile/ProfileContainer";
 import HeaderContainer from "./Component/Header/HeaderComponent";
 import {connect, Provider} from "react-redux";
@@ -15,6 +14,7 @@ import store, {AppStateType} from "./Redux/redux-store";
 import SettingContainer from "./Component/Content/Setting/SettingContainer";
 import {withRouter} from "./Hoc/withRouter";
 import Login from "./Component/Login/Login";
+import UsersPage from "./Component/Content/Users/UsersPage";
 
 type MapTypeProps = {
     initialized: boolean
@@ -60,7 +60,7 @@ const AppStart: React.FC<MapTypeProps & DispatchTypeProps> = (props) => {
                     <Route path='/login' element={!props.isAuth ? (<Login/>)
                         : (<Navigate replace to={"/profile"}/>)}/>
 
-                    <Route path="/users" element={props.isAuth ? (<UsersContainer/>)
+                    <Route path="/users" element={props.isAuth ? (<UsersPage/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
                 </Routes>

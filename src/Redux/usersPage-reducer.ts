@@ -22,8 +22,8 @@ type InitialState = typeof initialState;
 export type FilterType = typeof initialState.filter;
 type ActionsTypes = InferActionsType<typeof actions>
 
-type DispatchType = Dispatch<ActionsTypes>
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+export type DispatchType = Dispatch<ActionsTypes>
+export type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const usersPageReducer = (state = initialState, action: ActionsTypes):InitialState => {
     switch (action.type){
@@ -99,5 +99,3 @@ export const unfollow = (userId: number): ThunkType => async (dispatch) => {
 export const follow = (userId: number): ThunkType => async (dispatch) => {
     await followUnFollow(dispatch, userId, UsersAPI.follow.bind(UsersAPI), actions.followSuccess);
 }
-
-

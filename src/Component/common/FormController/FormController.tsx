@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './FormController.module.css';
+import styles from './FormController.module.scss';
 
 type FormControlPropsType = {
     meta: {
