@@ -13,12 +13,12 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../../Redux/selector/users-selector";
+import {useSearchParams} from "react-router-dom";
 
 export const Users: React.FC = () => {
 
     const totalUsersCount = useSelector(getTotalUsersCount)
     const followingInProgress = useSelector(followingProgress)
-
     const currentPage = useSelector(getCurrentPage)
     const pageSize = useSelector(getPageSize)
     const filter = useSelector(getFilterUsers)
@@ -26,28 +26,51 @@ export const Users: React.FC = () => {
 
     const dispatch = useDispatch();
 
+    let [searchParams, setSearchParams] = useSearchParams();
+    const termParamURL = searchParams.get('term') || ''
+    const friendParamURL = searchParams.get('friend') || 'null'
+    const currentPageParamURL = searchParams.get('currentPage') || '1'
+
     useEffect(() => {
         {
-            dispatch(reviewUsers(currentPage, pageSize, filter));
+            let actualFriend;
+            if(friendParamURL === "null"){
+                actualFriend = null
+            }else actualFriend = friendParamURL === "true";
+
+            const actualFilter = {term: termParamURL, friend: actualFriend}
+            dispatch(reviewUsers(Number(currentPageParamURL), pageSize, actualFilter));
         }
-    }, [currentPage, pageSize])
+    }, [currentPageParamURL, pageSize])
+
+    useEffect(() => {
+        {
+            const queryTerm = filter.term
+            const queryFriend = String(filter.friend)
+            const queryCurrentPage = String(currentPage)
+
+            let params = {term: '', friend: '', currentPage: ''}
+
+            if (queryTerm.length) params.term = filter.term
+            if (queryFriend.length) params.friend = String(filter.friend)
+            if (queryCurrentPage) params.currentPage = String(currentPage)
+
+            setSearchParams(params)
+        }
+    }, [filter.term, filter.friend, currentPage])
 
     let onPageChanged = (pageNumber: number) => {
         dispatch(reviewUsers(pageNumber, pageSize, filter));
     }
-
     let onFilterChanged = (filter: FilterType) => {
         dispatch(reviewUsers(1, pageSize, filter));
     }
-
     let followUser = (userId: number) => {
         dispatch(follow(userId));
     }
-
     let unfollowUser = (userId: number) => {
         dispatch(unfollow(userId));
     }
-
 
     return <div>
         <div>
@@ -55,7 +78,7 @@ export const Users: React.FC = () => {
                        currentPage={currentPage} onPageChanged={onPageChanged}/>
         </div>
         <div className={style.searchForm}>
-            <UserForm onFilterChanged={onFilterChanged}/>
+            <UserForm onFilterChanged={onFilterChanged} term={termParamURL} friend={friendParamURL}/>
         </div>
 
 
