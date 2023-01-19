@@ -41,7 +41,7 @@ export const Users: React.FC = () => {
             const actualFilter = {term: termParamURL, friend: actualFriend}
             dispatch(reviewUsers(Number(currentPageParamURL), pageSize, actualFilter));
         }
-    }, [currentPageParamURL, pageSize])
+    }, [])
 
     useEffect(() => {
         {
@@ -49,13 +49,11 @@ export const Users: React.FC = () => {
             const queryFriend = String(filter.friend)
             const queryCurrentPage = String(currentPage)
 
-            let params = {term: '', friend: '', currentPage: ''}
+            if (queryTerm.length) searchParams.set('term', queryTerm)
+            if (queryFriend !== 'null') searchParams.set('friend',  queryFriend)
+            if (queryCurrentPage) searchParams.set('currentPage', queryCurrentPage)
 
-            if (queryTerm.length) params.term = filter.term
-            if (queryFriend.length) params.friend = String(filter.friend)
-            if (queryCurrentPage) params.currentPage = String(currentPage)
-
-            setSearchParams(params)
+            setSearchParams(searchParams)
         }
     }, [filter.term, filter.friend, currentPage])
 
