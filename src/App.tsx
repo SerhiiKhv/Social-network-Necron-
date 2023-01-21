@@ -16,6 +16,7 @@ import {withRouter} from "./Hoc/withRouter";
 import {LoginPage} from "./Component/Login/Login";
 import UsersPage from "./Component/Content/Users/UsersPage";
 import {getIsAuth} from "./Redux/selector/login-selector";
+import ChatPage from "./Component/Content/Chat/ChatPage";
 
 type DispatchTypeProps = {
     withSuspense: () => any
@@ -64,6 +65,9 @@ const AppStart: React.FC<DispatchTypeProps> = () => {
                         : (<Navigate replace to={"/profile"}/>)}/>
 
                     <Route path="/users" element={isAuth ? (<UsersPage/>)
+                        : (<Navigate replace to={"/login"}/>)}/>
+
+                    <Route path="/chat" element={isAuth ? (<ChatPage/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
                 </Routes>
