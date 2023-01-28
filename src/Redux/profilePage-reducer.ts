@@ -62,6 +62,10 @@ export const actions = {
     setPhotosSuccess: (photos: PhotosType) => ({type: 'SET_PHOTOS_SUCCESS', photos} as const)
 }
 
+export const addPost = (newPostText: string):ThunkType => async (dispatch) => {
+    dispatch(actions.addPostActiveCreator(newPostText));
+}
+
 export const getProfile = (userId: number | null):ThunkType => async (dispatch) => {
     let data = await ProfileAPI.getProfile(userId);
     dispatch(actions.setUserProfile(data));

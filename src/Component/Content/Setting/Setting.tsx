@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Setting.module.scss'
-import ProfileStatusWithHooks from "../Profile/AvaInfo/ProfileStatusWithHooks";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../../Redux/Types/types";
 

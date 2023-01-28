@@ -32,7 +32,6 @@ const Chat: React.FC = () => {
 }
 const Messages: React.FC = () => {
     const messages = useSelector((state: AppStateType) => state.chat.messages)
-
     return (
         <div style={{height: '500px', overflow: 'auto'}}>
             {messages.map((m, index) =>

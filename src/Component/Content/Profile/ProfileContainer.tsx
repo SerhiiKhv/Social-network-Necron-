@@ -1,61 +1,32 @@
 import React, {useEffect} from 'react';
 import Profile from "./Profile";
-import {
-    getProfile,
-    getStatusProfile, putPhotosProfile,
-    putStatusProfile
-} from "../../../Redux/profilePage-reducer";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {withRouter} from "../../../Hoc/withRouter";
-import {AppStateType} from "../../../Redux/redux-store";
+import {getProfile, getStatusProfile} from "../../../Redux/profilePage-reducer";
+import {useDispatch, useSelector} from "react-redux";
 import {useParams} from 'react-router-dom';
+import {getUserId} from "../../../Redux/selector/profile-selector";
 
-type MyPropsType = ReturnType<typeof mapStateToProps>
-type DispatchPropsType = {
-    getProfile: () => void
-    getStatusProfile: () => void
-}
+const ProfileContainer: React.FC<any> = (props) => {
+    let {userId} = useParams();
 
-const ProfileContainer: React.FC<MyPropsType & DispatchPropsType & any> = (props) => {
-
-    let { userId } = useParams();
+    const authorizedUserId = useSelector(getUserId)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (!userId) {
-            userId = props.authorizedUserId;
+            userId = String(authorizedUserId);
             if (!userId) {
                 props.history.push("/login");
             }
         }
-        props.getProfile(userId);
-        props.getStatusProfile(userId);
-    }, [props.authorizedUserId]);
-
+        dispatch(getProfile(Number(userId)));
+        dispatch(getStatusProfile(Number(userId)));
+    }, [authorizedUserId]);
 
     return (
         <div>
-            <Profile {...props}
-                     profile={props.profile}
-                     status={props.status}/>
+            <Profile/>
         </div>
     );
 }
-
-let mapStateToProps = (state: AppStateType) => {
-    return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authorizedUserId: state.authMe.userId,
-        isAuth: state.authMe.isAuth
-    }
-}
-
-export default compose<React.ComponentType>(
-    withRouter,
-    connect(mapStateToProps, {
-        getProfile, getStatusProfile,
-        putStatusProfile, putPhotosProfile
-    })
-)(ProfileContainer)
+export default ProfileContainer
 
