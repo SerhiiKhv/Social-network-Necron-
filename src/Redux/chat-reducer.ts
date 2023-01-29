@@ -1,7 +1,8 @@
 import {ThunkAction} from "redux-thunk";
 import {AppStateType, InferActionsType} from "./redux-store";
 import {Dispatch} from "redux";
-import {chatAPI, ChatMessageType} from "../Api/Chat-api";
+import {chatAPI, ChatMessageAPIType} from "../Api/Chat-api";
+import {v1} from "uuid"
 
 let initialState = {
     messages: [] as ChatMessageType[]
@@ -11,7 +12,7 @@ export const chatReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'MESSAGES_RECEIVED':
             return {
-                ...state, messages: [...state.messages, ...action.payload.messages]
+                ...state, messages: [...state.messages, ...action.payload.messages.map(m => ({...m, id: v1()}))].filter((m , index ,array) => index >= array.length - 100)
             }
         default:
             return state;
@@ -47,3 +48,4 @@ export const sendMessage = (message: string): ThunkType => async () => {
 
 type ActionsTypes = InferActionsType<typeof actions>
 export type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+export type ChatMessageType = ChatMessageAPIType & {id?: string}

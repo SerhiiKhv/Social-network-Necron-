@@ -35,8 +35,8 @@ export const chatAPI = {
         ws?.send(message)
     }
 }
-type SubscribersType = (messages: ChatMessageType[]) => void
-export type ChatMessageType = {
+type SubscribersType = (messages: ChatMessageAPIType[]) => void
+export type ChatMessageAPIType = {
     message: string
     photo: string
     userId: number,

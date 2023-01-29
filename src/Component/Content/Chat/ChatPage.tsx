@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {sendMessage, startMessagesListening, stopMessagesListening} from "../../../Redux/chat-reducer";
+import {ChatMessageType, sendMessage, startMessagesListening, stopMessagesListening} from "../../../Redux/chat-reducer";
 import {AppStateType} from "../../../Redux/redux-store";
-import {ChatMessageType} from "../../../Api/Chat-api";
 
 const ChatPage: React.FC = () => {
     return (
@@ -32,29 +31,48 @@ const Chat: React.FC = () => {
 }
 const Messages: React.FC = () => {
     const messages = useSelector((state: AppStateType) => state.chat.messages)
+    const [isAutoScroll, seiIsAutoScroll] = useState(true)
+    const messagesAnchorRef = useRef<HTMLDivElement>(null)
+
+    const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const element = e.currentTarget
+
+        if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 100) {
+            !isAutoScroll && seiIsAutoScroll(true)
+        } else {
+            isAutoScroll && seiIsAutoScroll(false)
+        }
+    }
+
+    useEffect(() => {
+        if (isAutoScroll) {
+            messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})
+        }
+    }, [messages])
+
     return (
-        <div style={{height: '500px', overflow: 'auto'}}>
-            {messages.map((m, index) =>
-                <Message key={index} message={m}/>)}
+        <div style={{height: '500px', overflow: 'auto'}} onScroll={scrollHandler}>
+            {messages.map((m) =>
+                <Message key={m.id} message={m}/>)}
+            <div ref={messagesAnchorRef}></div>
         </div>
     )
 }
 
-const Message: React.FC<{ message: ChatMessageType }> = ({message}) => {
+const Message: React.FC<{ message: ChatMessageType }> = React.memo(({message}) => {
     let CheckPhotoMessage = (photo: string) => {
         return photo !== null ? photo : 'https://cdn1.vectorstock.com/i/1000x1000/15/25/approved-person-icon-male-add-user-person-avatar-vector-21201525.jpg'
     }
-
+    console.log('<<<<Message')
     return (
         <div>
-            <img src={CheckPhotoMessage(message.photo)} style={{height: '45px'}}/>
+            <img src={CheckPhotoMessage(message.photo)} style={{height: '45px'}} alt={'Loading img'}/>
             <b> {message.message} </b>
             <b> {message.userName} </b>
             <hr/>
         </div>
     )
-}
-
+})
 
 const AddMessage: React.FC = () => {
     const [message, setMessage] = useState('')

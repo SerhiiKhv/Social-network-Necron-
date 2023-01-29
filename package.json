@@ -22,6 +22,7 @@
     "reselect": "^4.1.7",
     "sass": "^1.57.1",
     "typescript": "^4.9.4",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.0",
     "axios": "^1.2.2",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1"
