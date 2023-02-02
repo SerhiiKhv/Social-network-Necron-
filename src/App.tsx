@@ -47,6 +47,7 @@ const AppStart: React.FC<DispatchTypeProps> = () => {
 
             <Nav/>
 
+
             <div className='app-wrapper-content'>
                 <Routes>
                     <Route path='/profile/:userId?' element={isAuth ? (<ProfileContainer/>)

@@ -12,7 +12,7 @@ export const chatReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'MESSAGES_RECEIVED':
             return {
-                ...state, messages: [...state.messages, ...action.payload.messages.map(m => ({...m, id: v1()}))].filter((m , index ,array) => index >= array.length - 100)
+                ...state, messages: [...state.messages, ...action.payload.messages.map(m => ({...m, id: v1()}))].filter((m , index ,array) => index >= array.length - 70)
             }
         default:
             return state;

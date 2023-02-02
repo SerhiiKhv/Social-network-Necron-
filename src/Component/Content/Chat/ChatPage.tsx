@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {ChatMessageType, sendMessage, startMessagesListening, stopMessagesListening} from "../../../Redux/chat-reducer";
 import {AppStateType} from "../../../Redux/redux-store";
+import style from "./Chat.module.scss"
 
 const ChatPage: React.FC = () => {
     return (
@@ -11,7 +12,7 @@ const ChatPage: React.FC = () => {
     )
 }
 
-const Chat: React.FC = () => {
+const Chat: React.FC = React.memo(() => {
 
     const dispatch = useDispatch()
 
@@ -28,15 +29,15 @@ const Chat: React.FC = () => {
             <AddMessage/>
         </div>
     )
-}
-const Messages: React.FC = () => {
+})
+
+
+const Messages: React.FC = React.memo(() => {
     const messages = useSelector((state: AppStateType) => state.chat.messages)
     const [isAutoScroll, seiIsAutoScroll] = useState(true)
     const messagesAnchorRef = useRef<HTMLDivElement>(null)
-
     const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
         const element = e.currentTarget
-
         if (Math.abs((element.scrollHeight - element.scrollTop) - element.clientHeight) < 100) {
             !isAutoScroll && seiIsAutoScroll(true)
         } else {
@@ -50,14 +51,17 @@ const Messages: React.FC = () => {
         }
     }, [messages])
 
+    console.log(messages)
+
+
     return (
-        <div style={{height: '500px', overflow: 'auto'}} onScroll={scrollHandler}>
+        <div className={style.chat} onScroll={scrollHandler}>
             {messages.map((m) =>
                 <Message key={m.id} message={m}/>)}
             <div ref={messagesAnchorRef}></div>
         </div>
     )
-}
+})
 
 const Message: React.FC<{ message: ChatMessageType }> = React.memo(({message}) => {
     let CheckPhotoMessage = (photo: string) => {
@@ -88,8 +92,8 @@ const AddMessage: React.FC = () => {
 
     return (
         <div>
-            <textarea value={message} onChange={(e) => setMessage(e.currentTarget.value)}></textarea>
-            <button onClick={sendMessages}>Submit</button>
+            <input className={style.textarea} value={message} onChange={(e) => setMessage(e.currentTarget.value)}></input>
+            <button className={style.button} onClick={sendMessages}>Submit</button>
         </div>
     )
 }

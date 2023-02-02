@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from 'react-router-dom';
 import {getUserId} from "../../../Redux/selector/profile-selector";
 
-const ProfileContainer: React.FC<any> = (props) => {
+const ProfileContainer: React.FC = () => {
     let {userId} = useParams();
 
     const authorizedUserId = useSelector(getUserId)
@@ -14,13 +14,10 @@ const ProfileContainer: React.FC<any> = (props) => {
     useEffect(() => {
         if (!userId) {
             userId = String(authorizedUserId);
-            if (!userId) {
-                props.history.push("/login");
-            }
         }
         dispatch(getProfile(Number(userId)));
         dispatch(getStatusProfile(Number(userId)));
-    }, [authorizedUserId]);
+    }, [authorizedUserId, userId]);
 
     return (
         <div>

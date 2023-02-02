@@ -1,0 +1,30 @@
+.chat{
+  height: 650px;
+  overflow: auto;
+}
+
+.button{
+  margin: 5px;
+  height: 25px;
+  background-color: #057fd0;
+  color: white;
+  border: 6px solid #057fd0;
+  border-radius: 25px;
+}
+
+.textarea{
+  height: 35px;
+  width: 90%;
+  background-color: rgba(255,255,255,0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  margin-left: 15px;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: 'Poppins',sans-serif;
+  color: #ffffff;
+  letter-spacing: 1px;
+  outline: none;
+  border: none;
+}

@@ -6,7 +6,6 @@ import UserForm from "./UsersSearchFrom";
 import {FilterType, follow, reviewUsers, unfollow} from "../../../Redux/usersPage-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    followingProgress,
     getCurrentPage,
     getFilterUsers,
     getPageSize,
@@ -15,10 +14,10 @@ import {
 } from "../../../Redux/selector/users-selector";
 import {useSearchParams} from "react-router-dom";
 
-export const Users: React.FC = () => {
+export const Users: React.FC = React.memo(() => {
 
     const totalUsersCount = useSelector(getTotalUsersCount)
-    const followingInProgress = useSelector(followingProgress)
+    //const followingInProgress = useSelector(followingProgress)
     const currentPage = useSelector(getCurrentPage)
     const pageSize = useSelector(getPageSize)
     const filter = useSelector(getFilterUsers)
@@ -73,7 +72,7 @@ export const Users: React.FC = () => {
     return <div>
         <div>
             <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize}
-                       currentPage={currentPage} onPageChanged={onPageChanged}/>
+                       currentPage={Number(currentPageParamURL)} onPageChanged={onPageChanged}/>
         </div>
         <div className={style.searchForm}>
             <UserForm onFilterChanged={onFilterChanged} term={termParamURL} friend={friendParamURL}/>
@@ -91,4 +90,4 @@ export const Users: React.FC = () => {
         }
         </div>
     </div>
-}
+})
