@@ -15,17 +15,14 @@ type PropsType = {
 }
 
 const Setting: React.FC<PropsType> = (props) => {
-
     if (!props.profile) {
         return <Preloader/>
     }
-
     const onPutPhotosProfile = (e: any) => {
         if (e.target.files.length) {
             props.putPhotosProfile(e.target.files[0]);
         }
     }
-
     if (!props.profile.photos.large) {
         props.profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
     }
@@ -39,14 +36,11 @@ const Setting: React.FC<PropsType> = (props) => {
             <div className={style.Ava}>
                 <b>Your avatar</b>
                 <div>
-                    <img src={props.profile.photos.large}/>
+                    <label className="custom-file-upload">
+                        <input type={"file"} onChange={onPutPhotosProfile}/>
+                        <img src={props.profile.photos.large}/>
+                    </label>
                 </div>
-
-                <label className="custom-file-upload">
-                    <input type={"file"} onChange={onPutPhotosProfile}/>
-                    Select a photo to replace your avatar
-                </label>
-
             </div>
 
             <div className={style.status}>

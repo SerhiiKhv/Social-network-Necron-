@@ -10,10 +10,10 @@ const Nav = () => {
                 <NavLink to='/profile' className={({isActive} ) =>
                     isActive  ? s.activeLink : s.noActiveLink} >Profile</NavLink>
             </div>
-            <div className={s.item}>
+            {/*{<div className={s.item}>
                 <NavLink to='/massage' className={({isActive} ) =>
                     isActive  ? s.activeLink : s.noActiveLink} >Message</NavLink>
-            </div>
+            </div>}*/}
             <div className={s.item}>
                 <NavLink to='/setting' className={({isActive} ) =>
                     isActive  ? s.activeLink : s.noActiveLink} >Setting</NavLink>

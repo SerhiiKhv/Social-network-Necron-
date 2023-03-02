@@ -3,7 +3,6 @@ import './App.scss';
 import Nav from './Component/Nav/Nav'
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
 import Music from "./Component/Content/Music/Music";
-import MassageContainer from "./Component/Content/Masseg/MassegContainer";
 import ProfileContainer from "./Component/Content/Profile/ProfileContainer";
 import HeaderContainer from "./Component/Header/HeaderComponent";
 import {Provider, useDispatch, useSelector} from "react-redux";
@@ -17,6 +16,7 @@ import {LoginPage} from "./Component/Login/Login";
 import UsersPage from "./Component/Content/Users/UsersPage";
 import {getIsAuth} from "./Redux/selector/login-selector";
 import ChatPage from "./Component/Content/Chat/ChatPage";
+import Message from "./Component/Content/Masseg/Message";
 
 type DispatchTypeProps = {
     withSuspense: () => any
@@ -53,8 +53,8 @@ const AppStart: React.FC<DispatchTypeProps> = () => {
                     <Route path='/profile/:userId?' element={isAuth ? (<ProfileContainer/>)
                         : (<Navigate replace to={"/login"}/>)}/>
 
-                    <Route path='/massage' element={isAuth ? (<MassageContainer/>)
-                        : (<Navigate replace to={"/login"}/>)}/>
+                    {/*<Route path='/massage' element={isAuth ? (<Message/>)
+                        : (<Navigate replace to={"/login"}/>)}/>*/}
 
                     <Route path='/setting' element={isAuth ? (<SettingContainer/>)
                         : (<Navigate replace to={"/login"}/>)}/>

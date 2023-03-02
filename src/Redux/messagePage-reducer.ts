@@ -3,11 +3,11 @@ const UPDATE_NEW_MESSAGE_TEXT = 'update-New-Message-Text';
 
 export type DialogsType = {
     name: string
-    id: number
+    id: string
     ava: string
 }
 export type DialogType = {
-    id: number
+    id: string
     text: string
     ava: string
 }
@@ -16,24 +16,24 @@ let initialState = {
     dialogs: [
         {
             name: 'Ana',
-            id: 1,
+            id: '1',
             ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'
         },
         {
             name: 'Kira',
-            id: 2,
+            id: '2',
             ava: 'https://i.pinimg.com/originals/2c/96/34/2c9634d88d12767eac1f54189af3194c.jpg'
         },
         {
             name: 'Tom',
-            id: 3,
+            id: '3',
             ava: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'
         }
     ] as Array<DialogsType>,
     dialog: [
-        {id: 1, text: 'Hi', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
-        {id: 2,text: 'Hello', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
-        {id: 3,text: 'Good', ava: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'}
+        {id: '1', text: 'Hi', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
+        {id: '2',text: 'Hello', ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'},
+        {id: '3',text: 'Good', ava: 'https://www.meme-arsenal.com/memes/24ea176ff61da30ee142f0dbca6dcc90.jpg'}
     ]as Array<DialogType>,
 
     newMessageText: ''
@@ -48,7 +48,7 @@ export const messagePageReducer = (state = initialState, action: ActionsTypes):I
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {
-                id: 4,
+                id: '4',
                 text: state.newMessageText,
                 ava: 'https://i.pinimg.com/originals/2d/0e/41/2d0e419c310033945063c6c9884b2725.jpg'
             }

@@ -27,6 +27,13 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
         setStatus(e.currentTarget.value);
     }
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            doActivatedEditMode();
+        }
+    };
+
         return (
             <div>
                 {!editMode &&
@@ -36,8 +43,10 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
                 }
                 {editMode &&
                 <div>
-                    <input onChange={onStatusChange} autoFocus={true} onBlur={doActivatedEditMode}
-                           value={status}/>
+                    <input onChange={onStatusChange} autoFocus={true}
+                           onBlur={doActivatedEditMode}
+                           value={status}
+                           onKeyDown={handleKeyDown}/>
                 </div>
                 }
             </div>

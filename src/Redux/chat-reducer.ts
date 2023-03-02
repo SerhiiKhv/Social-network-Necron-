@@ -12,7 +12,13 @@ export const chatReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case 'MESSAGES_RECEIVED':
             return {
-                ...state, messages: [...state.messages, ...action.payload.messages.map(m => ({...m, id: v1()}))].filter((m , index ,array) => index >= array.length - 70)
+                ...state, messages: [...state.messages, ...action.payload.message
+                    .map(m => ({...m, id: v1()}))]
+                    .filter((m , index ,array) => index >= array.length - 70)
+            }
+        case 'MESSAGES_CLEAR':
+            return {
+                ...state, messages: []
             }
         default:
             return state;
@@ -20,26 +26,35 @@ export const chatReducer = (state = initialState, action: ActionsTypes) => {
 }
 
 export const actions = {
-    massageReceived: (messages: ChatMessageType[]) => ({type: 'MESSAGES_RECEIVED', payload: {messages}} as const),
+    massageReceived: (message: ChatMessageType[]) => ({type: 'MESSAGES_RECEIVED', payload: {message}} as const),
+    massageClear: () => ({type: 'MESSAGES_CLEAR', payload: []} as const),
 }
 
 let _newMassageHandler: ((messages: ChatMessageType[]) => void) | null = null
 let newMassageHandlerCreator = (dispatch: Dispatch) => {
-    if (_newMassageHandler === null) {
+    if (_newMassageHandler == null) {
         _newMassageHandler = (messages) => {
             dispatch(actions.massageReceived(messages))
+            debugger
         }
     }
     return _newMassageHandler
 }
+
+let messageClear = (dispatch: Dispatch) => {
+    dispatch(actions.massageClear())
+}
 export const startMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.start()
     chatAPI.subscribe(newMassageHandlerCreator(dispatch))
+    debugger
 }
 
 export const stopMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.unsubscribe(newMassageHandlerCreator(dispatch))
     chatAPI.stop()
+    messageClear(dispatch)
+    debugger
 }
 
 export const sendMessage = (message: string): ThunkType => async () => {
