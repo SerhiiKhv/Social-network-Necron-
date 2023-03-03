@@ -35,7 +35,6 @@ let newMassageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMassageHandler == null) {
         _newMassageHandler = (messages) => {
             dispatch(actions.massageReceived(messages))
-            debugger
         }
     }
     return _newMassageHandler
@@ -47,14 +46,12 @@ let messageClear = (dispatch: Dispatch) => {
 export const startMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.start()
     chatAPI.subscribe(newMassageHandlerCreator(dispatch))
-    debugger
 }
 
 export const stopMessagesListening = (): ThunkType => async (dispatch) => {
     chatAPI.unsubscribe(newMassageHandlerCreator(dispatch))
     chatAPI.stop()
     messageClear(dispatch)
-    debugger
 }
 
 export const sendMessage = (message: string): ThunkType => async () => {

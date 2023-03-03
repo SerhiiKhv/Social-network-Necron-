@@ -3,6 +3,7 @@ import {ChatMessageType} from "../../../../../Redux/chat-reducer";
 import {useSelector} from "react-redux";
 import {getUserId} from "../../../../../Redux/selector/profile-selector";
 import style from "./Message.module.scss";
+import {NavLink} from "react-router-dom";
 
 const Message: React.FC<{ message: ChatMessageType }> = React.memo(({message}) => {
     let CheckPhotoMessage = (photo: string) => {
@@ -14,7 +15,9 @@ const Message: React.FC<{ message: ChatMessageType }> = React.memo(({message}) =
         if (message.userId !== authorizedUserId) {
             return <div className={style.inlineFlex}>
                 <div>
-                    <img src={CheckPhotoMessage(message.photo)} className={style.userImgStyle} alt={'Loading img'}/>
+                    <NavLink to={'/profile/' + message.userId}>
+                        <img src={CheckPhotoMessage(message.photo)} className={style.userImgStyle} alt={'Loading img'}/>
+                    </NavLink>
                 </div>
                 <div className={style.message}>
                     <div className={style.messageHeader}>
@@ -26,8 +29,8 @@ const Message: React.FC<{ message: ChatMessageType }> = React.memo(({message}) =
                 </div>
             </div>
         }
-        return <div className={style.messageAuthorizedUser}>
-            <div className={style.message}>
+        return <div className={style.messageTextAuthorizedUser}>
+            <div className={style.messageAuthorizedUser}>
                 <div className={style.messageHeader}>
                     <span className={style.messageSender}>{message.userName}</span>
                 </div>
@@ -36,7 +39,9 @@ const Message: React.FC<{ message: ChatMessageType }> = React.memo(({message}) =
                 </div>
             </div>
             <div>
-                <img src={CheckPhotoMessage(message.photo)} className={style.userImgStyle} alt={'Loading img'}/>
+                <NavLink to={'/profile/' + message.userId}>
+                    <img src={CheckPhotoMessage(message.photo)} className={style.userImgStyle} alt={'Loading img'}/>
+                </NavLink>
             </div>
         </div>
     }

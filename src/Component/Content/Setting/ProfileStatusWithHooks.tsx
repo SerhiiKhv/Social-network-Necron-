@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {putStatusProfile} from "../../../Redux/profilePage-reducer";
+import {getStatus} from "../../../Redux/selector/profile-selector";
 
-type PropsType = {
-    status: string
-    putStatusProfile: (status: string) => void
-}
-
-const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
-
+const ProfileStatusWithHooks: React.FC = () => {
+    let status = useSelector(getStatus)
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status);
+    let [newStatus, setNewStatus] = useState(status);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        setStatus(props.status);
-    }, [props.status]);
+        setNewStatus(status);
+    }, [status]);
 
     const activatedEditMode = () =>{
         setEditMode(true);
@@ -20,11 +19,11 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
 
     const doActivatedEditMode = () =>{
         setEditMode(false);
-        props.putStatusProfile(status);
+        dispatch(putStatusProfile(newStatus));
     }
 
     const onStatusChange = (e: any) => {
-        setStatus(e.currentTarget.value);
+        setNewStatus(e.currentTarget.value);
     }
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,14 +37,14 @@ const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
             <div>
                 {!editMode &&
                     <div>
-                        <span onDoubleClick={activatedEditMode}>{status || "-------"}</span>
+                        <span onDoubleClick={activatedEditMode}>{newStatus || "-------"}</span>
                     </div>
                 }
                 {editMode &&
                 <div>
                     <input onChange={onStatusChange} autoFocus={true}
                            onBlur={doActivatedEditMode}
-                           value={status}
+                           value={newStatus}
                            onKeyDown={handleKeyDown}/>
                 </div>
                 }

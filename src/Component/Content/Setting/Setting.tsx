@@ -2,29 +2,24 @@ import React from 'react';
 import style from './Setting.module.scss'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
-import {ProfileType} from "../../../Redux/Types/types";
+import {useDispatch, useSelector} from "react-redux";
+import {getProfile} from "../../../Redux/selector/profile-selector";
+import {putPhotosProfile} from "../../../Redux/profilePage-reducer";
 
-type PropsType = {
-    profile: ProfileType
-    status: string
+const Setting: React.FC = () => {
+    let profile = useSelector(getProfile)
+    const dispatch = useDispatch()
 
-    putPhotosProfile: (photosFile: any) => void
-    putStatusProfile: (status: string) => void
-
-    putInfoProfile: (profile: ProfileType) => void
-}
-
-const Setting: React.FC<PropsType> = (props) => {
-    if (!props.profile) {
+    if (!profile) {
         return <Preloader/>
     }
     const onPutPhotosProfile = (e: any) => {
         if (e.target.files.length) {
-            props.putPhotosProfile(e.target.files[0]);
+            dispatch(putPhotosProfile(e.target.files[0]));
         }
     }
-    if (!props.profile.photos.large) {
-        props.profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
+    if (!profile.photos.large) {
+        profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
     }
 
     return (
@@ -38,19 +33,17 @@ const Setting: React.FC<PropsType> = (props) => {
                 <div>
                     <label className="custom-file-upload">
                         <input type={"file"} onChange={onPutPhotosProfile}/>
-                        <img src={props.profile.photos.large}/>
+                        <img src={profile.photos.large} alt={"Loading img...."}/>
                     </label>
                 </div>
             </div>
 
             <div className={style.status}>
                 <b>Your status</b>:
-                <ProfileStatusWithHooks status={props.status}
-                                        putStatusProfile={props.putStatusProfile}/>
+                <ProfileStatusWithHooks/>
             </div>
 
             {/*<SettingInfoProfileForm putInfoProfile={props.putInfoProfile}/>*/}
-
         </div>
     );
 }
