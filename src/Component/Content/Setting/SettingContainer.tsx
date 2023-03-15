@@ -3,6 +3,7 @@ import {getProfile, getStatusProfile} from "../../../Redux/profilePage-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import Setting from "./Setting";
 import {getUserId} from "../../../Redux/selector/profile-selector";
+
 const SettingContainer: React.FC = () =>{
     let authorizedUserId = useSelector(getUserId)
     const [userID] = useState(authorizedUserId)
@@ -15,6 +16,7 @@ const SettingContainer: React.FC = () =>{
             dispatch(getStatusProfile(userID as number));
         }
     }, [userID])
+
 
         return (
             <Setting/>

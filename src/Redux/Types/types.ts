@@ -20,7 +20,9 @@ export type ProfileType = {
     fullName: string
     contacts: ContactsType
     photos:PhotosType
-    posts: Array<PostType>
+    aboutMe: string,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
 }
 export type UsersType ={
     id: number

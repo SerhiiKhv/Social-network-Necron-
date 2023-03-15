@@ -16,7 +16,7 @@ import {LoginPage} from "./Component/Login/Login";
 import UsersPage from "./Component/Content/Users/UsersPage";
 import {getIsAuth} from "./Redux/selector/login-selector";
 import ChatPage from "./Component/Content/Chat/ChatPage";
-import Message from "./Component/Content/Masseg/Message";
+import {LanguageProvider} from "./Language/components/LanguageContext";
 
 type DispatchTypeProps = {
     withSuspense: () => any
@@ -85,9 +85,11 @@ let AppContainer = compose<React.ComponentType>(
 
 let App = () => {
     return <BrowserRouter>
-        <Provider store={store}>
-            <AppContainer/>
-        </Provider>
+        <LanguageProvider>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </LanguageProvider>
     </BrowserRouter>
 }
 

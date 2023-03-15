@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import style from './Setting.module.scss'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfile} from "../../../Redux/selector/profile-selector";
 import {putPhotosProfile} from "../../../Redux/profilePage-reducer";
+import {LanguageContext} from "../../../Language/components/LanguageContext";
+import {settingLanguage as enSettingLanguage} from "../../../Language/LanguageType/en";
+import {settingLanguage as ukSettingLanguage} from "../../../Language/LanguageType/uk";
 
 const Setting: React.FC = () => {
     let profile = useSelector(getProfile)
     const dispatch = useDispatch()
+
+    const { lang } = useContext(LanguageContext);
+    const settingLanguage = lang === "en" ? enSettingLanguage : ukSettingLanguage;
+
 
     if (!profile) {
         return <Preloader/>
@@ -22,14 +29,15 @@ const Setting: React.FC = () => {
         profile.photos.large = 'https://www.dissernet.org//picts/articles/Mrs3.jpg';
     }
 
+
     return (
         <div className={style.setting}>
             <div className={style.title}>
-                <h1>Setting</h1>
+                <h1>{settingLanguage.setting}</h1>
             </div>
 
             <div className={style.Ava}>
-                <b>Your avatar</b>
+                <b>{settingLanguage.avatar}</b>
                 <div>
                     <label className="custom-file-upload">
                         <input type={"file"} onChange={onPutPhotosProfile}/>
@@ -39,37 +47,125 @@ const Setting: React.FC = () => {
             </div>
 
             <div className={style.status}>
-                <b>Your status</b>:
+                <b>{settingLanguage.status}</b>:
                 <ProfileStatusWithHooks/>
             </div>
 
-            {/*<SettingInfoProfileForm putInfoProfile={props.putInfoProfile}/>*/}
+            {/*<SettingInfoProfileForm />*/}
         </div>
     );
 }
+/*
 
-/*const SettingInfoProfileForm = (props) => {
-    return(
-        <Form
-            onSubmit={formData => {
-                console.log(formData);
-                props.putInfoProfile(formData);
-            }}>
-            {({handleSubmit}) => (
+const SettingInfoProfileForm = () => {
+    const submit = (values: ProfileType) => {
+        const profile = {
+            AboutMe: "123",
+            lookingForAJob: true,
+            lookingForAJobDescription: '123',
+            fullName: "Alamay",
+            contacts: {
+                github: "github.com",
+                facebook: "",
+                instagram: "",
+                twitter: "",
+                youtube: "",
+                mainLink: ""
+            },
+
+            userId: 19690,
+            photos: {
+                small: "",
+                large: ""
+            },
+            status: "",
+        }
+
+        dispatch(putInfoContactProfile(profile))
+    }
+
+    let [gitHub, setGitHub] = useState("");
+    let [facebook, setFacebook] = useState("");
+    let [instagram, setInstagram] = useState("");
+    let [twitter, setTwitter] = useState("");
+    let [youtube, setYoutube] = useState("");
+    let [mainLink, setMainLink] = useState("");
+
+    const dispatch = useDispatch()
+    const onYoutubeChange = (e: any) => {
+        setYoutube(e.currentTarget.value);
+    }
+    const onMainLinkChange = (e: any) => {
+        setMainLink(e.currentTarget.value);
+    }
+    const onGitHubChange = (e: any) => {
+        setGitHub(e.currentTarget.value);
+    }
+    const onFacebookChange = (e: any) => {
+        setFacebook(e.currentTarget.value);
+    }
+    const onInstagramChange = (e: any) => {
+        setInstagram(e.currentTarget.value);
+    }
+    const onTwitterChange = (e: any) => {
+        setTwitter(e.currentTarget.value);
+    }
+
+    const SettingFormValidate = () => {
+        return {}
+    }
+
+    return <div>
+        <Formik
+            enableReinitialize
+            initialValues={{
+                aboutMe: "",
+                lookingForAJob: true,
+                lookingForAJobDescription: '',
+                fullName: "Alamay",
+                contacts: {
+                    github: "",
+                    facebook: "",
+                    instagram: "",
+                    twitter: "",
+                    youtube: "",
+                    mainLink: ""
+                },
+                userId: 123,
+                photos: {
+                    small: "",
+                    large: ""
+                },
+                status: "",
+               }}
+            validate={SettingFormValidate}
+            onSubmit={submit}
+        >
+            {({
+                  handleSubmit
+              }) => (
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <Field placeholder={"Full name"} name={"fullName"} component={Input}
-                               validate={required}/>
-                    </div>
-
-                    <div>
-                        <button>Save</button>
-                    </div>
+                    <Field value={gitHub} onChange={onGitHubChange}
+                        type='text' name='gitHub'/>
+                    <Field value={facebook} onChange={onFacebookChange}
+                           type='text' name='facebook'/>
+                    <Field value={instagram} onChange={onInstagramChange}
+                           type='text' name='instagram'/>
+                    <Field value={twitter} onChange={onTwitterChange}
+                           type='text' name='twitter'/>
+                    <Field value={youtube} onChange={onYoutubeChange}
+                           type='text' name='youtube'/>
+                    <Field value={mainLink} onChange={onMainLinkChange}
+                           type='text' name='mainLink'/>
+                    <button type="submit">
+                        Submit
+                    </button>
                 </form>
             )}
-        </Form>
-    )
-}*/
+        </Formik>
+    </div>
+}
+*/
 
 
 export default Setting;

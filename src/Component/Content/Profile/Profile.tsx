@@ -47,6 +47,12 @@ const Profile: React.FC = () => {
             <div>
                 <b>twitter</b>: {createSocialNet(profile.contacts.twitter)}
             </div>
+            <div>
+                <b>youtube</b>: {createSocialNet(profile.contacts.youtube)}
+            </div>
+            <div>
+                <b>mainLink</b>: {createSocialNet(profile.contacts.mainLink)}
+            </div>
         </div>
     );
 }

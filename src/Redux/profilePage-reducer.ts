@@ -58,7 +58,7 @@ export const putPhotosProfile = (photosFile: File):ThunkType => async (dispatch)
         dispatch(actions.setPhotosSuccess(data.data.photos));
     }
 }
-export const putInfoProfile = (profile: ProfileType):ThunkType => async (dispatch, getState: () => AppStateType) => {
+export const putInfoContactProfile = (profile: ProfileType):ThunkType => async (dispatch, getState: () => AppStateType) => {
     const userId = getState().authMe.userId;
     let data = await ProfileAPI.putProfile(profile)
     if (data.resultCode === ResultsCodesEnum.Success) {

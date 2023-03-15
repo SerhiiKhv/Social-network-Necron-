@@ -35,9 +35,6 @@ export const UsersAPI = {
     },
     follow(userId: number) {
         return instance.post<FollowResponseType>(`follow/${userId}`)
-    },
-    getProfile(userId: number){
-        return instance.get<boolean>(`profile/` + userId);
     }
 }
 
