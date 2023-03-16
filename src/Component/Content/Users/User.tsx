@@ -1,12 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import s from './Users.module.scss'
+import styles from './Users.module.scss'
 import userPhoto from '../../../Assets/ImgUsers/user.jpg';
 import {NavLink} from "react-router-dom";
-import styles from './Users.module.scss'
 import {UsersType} from "../../../Redux/Types/types";
-import {LanguageContext} from "../../../Language/components/LanguageContext";
-import {usersSearchLanguage as enUsersSearchLanguage} from "../../../Language/LanguageType/en";
-import {usersSearchLanguage as ukUsersSearchLanguage} from "../../../Language/LanguageType/uk";
+import {CheckLanguageType} from "../../../Language/components/CheckLanguageType";
 
 type MapPropsType = {
     user: UsersType
@@ -19,13 +17,12 @@ type DispatchPropsType = {
 
 let User: React.FC<MapPropsType & DispatchPropsType> = ({user, unfollow, follow}) => {
 
-    const { lang } = useContext(LanguageContext);
-    const usersSearchLanguage = lang === "en" ? enUsersSearchLanguage : ukUsersSearchLanguage;
+    const usersSearchLanguage = CheckLanguageType()
 
     return <div className={styles.users}>
         <div>
             <NavLink to={'/profile/' + user.id}>
-                <img src={user.photos.small != null ? user.photos.small : userPhoto} className={s.userAva}/>
+                <img src={user.photos.small != null ? user.photos.small : userPhoto} className={s.userAva} alt={"Loading img..."}/>
             </NavLink>
         </div>
         <div className={styles.margin}>
@@ -35,11 +32,11 @@ let User: React.FC<MapPropsType & DispatchPropsType> = ({user, unfollow, follow}
                 {user.followed ?
                     <button className={styles.button} onClick={() => {
                         unfollow(user.id)
-                    }}>{usersSearchLanguage.follow}</button> :
+                    }}>{usersSearchLanguage.usersSearchLanguage.follow}</button> :
 
                     <button className={styles.button} onClick={() => {
                         follow(user.id);
-                    }}>{usersSearchLanguage.unFollow}</button>}
+                    }}>{usersSearchLanguage.usersSearchLanguage.unFollow}</button>}
             </div>
         </div>
 

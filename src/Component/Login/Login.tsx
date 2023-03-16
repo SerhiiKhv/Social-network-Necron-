@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Field, Form} from 'react-final-form'
 import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../Redux/authMe-reducer";
@@ -6,9 +6,7 @@ import {required} from "../../utils/validator/validator";
 import {Input} from "../common/FormController/FormController";
 import s from "./Login.module.scss"
 import {getCaptchaUrl} from "../../Redux/selector/login-selector";
-import {LanguageContext} from "../../Language/components/LanguageContext";
-import {loginLanguage as enLoginLanguage} from "../../Language/LanguageType/en";
-import {loginLanguage as ukLoginLanguage} from "../../Language/LanguageType/uk";
+import {CheckLanguageType} from "../../Language/components/CheckLanguageType";
 
 type LoginFormValuesType = {
     email: string
@@ -18,8 +16,7 @@ type LoginFormValuesType = {
 }
 export const LoginPage: React.FC = () => {
 
-    const { lang } = useContext(LanguageContext);
-    const loginLanguage = lang === "en" ? enLoginLanguage : ukLoginLanguage;
+    const loginLanguage = CheckLanguageType()
 
     const captchaUrl = useSelector(getCaptchaUrl)
     const dispatch = useDispatch()
@@ -33,7 +30,7 @@ export const LoginPage: React.FC = () => {
             onSubmit={onSubmitFunction}>
             {({handleSubmit}) => (
                 <form onSubmit={handleSubmit} className={s.text}>
-                    <h1 className={s.text}>{loginLanguage.login}</h1>
+                    <h1 className={s.text}>{loginLanguage.loginLanguage.login}</h1>
                     <div>
                         <Field placeholder={"Email"} name={"email"} component={Input}
                                validate={required} className={s.input}/>
@@ -47,10 +44,9 @@ export const LoginPage: React.FC = () => {
                         {captchaUrl &&
                             <Field placeholder={"Captcha"} name={"captcha"} component={Input} validate={required}
                                    className={s.input}/>}
-
                     </div>
                     <div>
-                        <button className={s.button}>{loginLanguage.loginButton}</button>
+                        <button className={s.button}>{loginLanguage.loginLanguage.loginButton}</button>
                     </div>
                 </form>
             )}

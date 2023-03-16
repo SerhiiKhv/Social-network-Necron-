@@ -1,9 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import styles from "./Paginator.module.scss";
 import cn from 'classnames';
-import {LanguageContext} from "../../../Language/components/LanguageContext";
-import {paginatorLanguage as enPaginatorLanguage} from "../../../Language/LanguageType/en";
-import {paginatorLanguage as ukPaginatorLanguage} from "../../../Language/LanguageType/uk";
+import {CheckLanguageType} from "../../../Language/components/CheckLanguageType";
 
 type PropsType = {
     totalItemsCount: number
@@ -15,9 +13,7 @@ type PropsType = {
 
 let Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
 
-    const { lang } = useContext(LanguageContext);
-    const paginatorLanguage = lang === "en" ? enPaginatorLanguage : ukPaginatorLanguage;
-
+    const paginatorLanguage = CheckLanguageType()
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 
@@ -34,7 +30,7 @@ let Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, o
 
     return <div className={styles.paginator}>
         {portionNumber > 1
-            && <button className={styles.button} onClick={() => {setPortionNumber((actual) => actual - 1)} }>{paginatorLanguage.back}</button>}
+            && <button className={styles.button} onClick={() => {setPortionNumber((actual) => actual - 1)} }>{paginatorLanguage.paginatorLanguage.back}</button>}
         {portionNumber > 1
             && <span className={styles.pageNumber} onClick={() => {setPortionNumber(() => 1)} }>1 ...</span>}
 
@@ -52,7 +48,7 @@ let Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, currentPage, o
             <span className={styles.pageNumber}
                   onClick={() => {setPortionNumber(() => portionCount)} }>... {pagesCount}</span>}
         {portionCount > portionNumber &&
-            <button className={styles.button} onClick={() => {setPortionNumber((actual) => actual + 1)} }>{paginatorLanguage.next}</button>}
+            <button className={styles.button} onClick={() => {setPortionNumber((actual) => actual + 1)} }>{paginatorLanguage.paginatorLanguage.next}</button>}
     </div>
 }
 

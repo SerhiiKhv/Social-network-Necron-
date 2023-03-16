@@ -1,21 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import style from './Setting.module.scss'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import Preloader from "../../common/Preloader/Preloader";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfile} from "../../../Redux/selector/profile-selector";
 import {putPhotosProfile} from "../../../Redux/profilePage-reducer";
-import {LanguageContext} from "../../../Language/components/LanguageContext";
-import {settingLanguage as enSettingLanguage} from "../../../Language/LanguageType/en";
-import {settingLanguage as ukSettingLanguage} from "../../../Language/LanguageType/uk";
+import {CheckLanguageType} from "../../../Language/components/CheckLanguageType";
 
 const Setting: React.FC = () => {
     let profile = useSelector(getProfile)
     const dispatch = useDispatch()
 
-    const { lang } = useContext(LanguageContext);
-    const settingLanguage = lang === "en" ? enSettingLanguage : ukSettingLanguage;
-
+    const settingLanguage = CheckLanguageType()
 
     if (!profile) {
         return <Preloader/>
@@ -33,11 +29,11 @@ const Setting: React.FC = () => {
     return (
         <div className={style.setting}>
             <div className={style.title}>
-                <h1>{settingLanguage.setting}</h1>
+                <h1>{settingLanguage.settingLanguage.setting}</h1>
             </div>
 
             <div className={style.Ava}>
-                <b>{settingLanguage.avatar}</b>
+                <b>{settingLanguage.settingLanguage.avatar}</b>
                 <div>
                     <label className="custom-file-upload">
                         <input type={"file"} onChange={onPutPhotosProfile}/>
@@ -47,7 +43,7 @@ const Setting: React.FC = () => {
             </div>
 
             <div className={style.status}>
-                <b>{settingLanguage.status}</b>:
+                <b>{settingLanguage.settingLanguage.status}</b>:
                 <ProfileStatusWithHooks/>
             </div>
 

@@ -1,20 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import s from './Nav.module.scss';
 import {NavLink} from "react-router-dom";
-import {LanguageContext} from "../../Language/components/LanguageContext";
-import {navMenu as enNavMenu} from "../../Language/LanguageType/en";
-import {navMenu as ukNavMenu} from "../../Language/LanguageType/uk";
+import {CheckLanguageType} from "../../Language/components/CheckLanguageType";
 
 const Nav = () => {
 
-    const { lang } = useContext(LanguageContext);
-    const navMenu = lang === "en" ? enNavMenu : ukNavMenu;
+    const navMenu = CheckLanguageType()
 
     return (
         <nav className={s.nav}>
             <div className={s.margin}>
                 <NavLink to='/profile' className={({isActive} ) =>
-                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.profile}</NavLink>
+                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.navMenu.profile}</NavLink>
             </div>
             {/*{<div className={s.margin}>
                 <NavLink to='/massage' className={({isActive} ) =>
@@ -22,20 +19,20 @@ const Nav = () => {
             </div>}*/}
             <div className={s.margin}>
                 <NavLink to='/setting' className={({isActive} ) =>
-                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.setting}</NavLink>
+                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.navMenu.setting}</NavLink>
             </div>
             <div className={s.margin}>
                 <NavLink to='/music' className={({isActive} ) =>
-                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.music}</NavLink>
+                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.navMenu.music}</NavLink>
             </div>
             <div className={s.margin}>
                 <NavLink to='/users' className={({isActive} ) =>
-                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.users}</NavLink>
+                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.navMenu.users}</NavLink>
             </div>
 
             <div className={s.margin}>
                 <NavLink to='/chat' className={({isActive} ) =>
-                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.chat}</NavLink>
+                    isActive  ? s.activeLink : s.noActiveLink} >{navMenu.navMenu.chat}</NavLink>
             </div>
         </nav>
     );
